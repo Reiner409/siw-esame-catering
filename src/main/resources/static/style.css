@@ -1,0 +1,141 @@
+html, body {
+	height: 100%;
+	background-color: black;
+	color: white;
+}
+
+h1 {
+	font: 2.0em comic-sans;
+	font-weight: bold;
+	box-sizing: border-box;
+}
+
+.flex-container {
+	display: flexbox;
+	align-items: stretch;
+	height: 100%;
+	min-height: 500px;
+}
+
+.titleContainer {
+	position: relative;
+	display: flex;
+	align-items: stretch;
+	overflow: hidden;
+	height: 65%;
+	padding: 20px;
+	border: 5px solid black;
+	/* background-color: red; */
+	border-radius: 250px;
+}
+
+.bg-image {
+	margin-top: -4%;
+	margin-left: -0.5%;
+	margin-right: -0.5%;
+	/* Add the blur effect */
+	filter: blur(8px);
+	-webkit-filter: blur(8px);
+	/* Full height */
+	height: 150%;
+	width: 10 px;
+	min-height: 500px;
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	/* background-size: cover; */
+	flex: 1;
+}
+
+.bg-text {
+	font-size: 3.5em;
+	/* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Black w/opacity/see-through */
+	color: white;
+	font-weight: bold;
+	border: 3px solid #f1f1f1;
+	border-radius: 1.0em;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 27%;
+	padding: 20px;
+	text-align: center;
+	flex: 1;
+}
+
+.informations {
+	font-size: 2.9em;
+	text-align: center;
+	flex: 0.5em;
+	align-self: center;
+	border: 3px solid;
+	background-color: rgb(255, 255, 255, 0.2);
+	margin: 2%;
+	padding-bottom: 0.5%;
+	border-radius: 2.0em;
+	overflow: auto;
+}
+
+.informationsImage {
+	border-radius: 10%;
+	flex: 6em;
+	overflow: hidden;
+}
+
+.informationsBoxLeft {
+	display: flex;
+	flex-direction: row;
+	margin: 2%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	justify-content: space-between;
+	margin-bottom: 5%;
+	animation-name: slideinLeft;
+	animation-duration: 2.5s;
+}
+
+.informationsBoxRight {
+	display: flex;
+	flex-direction: row;
+	margin: 2%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	justify-content: space-between;
+	animation-name: slideinRight;
+	animation-duration: 2.5s;
+}
+
+
+.menus {
+	
+}
+
+@keyframes slideinLeft
+{
+	from 
+	{ 
+	margin-left:100%;
+	opacity: 0%;
+	}
+	to {
+	margin-left: 2%;
+	opacity: 100%;
+	}
+}
+
+@keyframes slideinRight
+{
+
+	from 
+	{ 
+	margin-right:100%;
+	opacity: 0%;
+	}
+	to {
+	margin-right: 2%;
+	opacity: 100%;
+	}
+}

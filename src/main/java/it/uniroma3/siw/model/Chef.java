@@ -24,13 +24,17 @@ public class Chef {
 	@Column(nullable = false)
 	private String nazionalita;
 	
+	@Column(nullable = false)
+	private String immagine;
+	
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Buffet> buffet;
 
-	public Chef(String nome, String cognome, String nazionalita, List<Buffet> buffet) {
+	public Chef(String nome, String cognome, String nazionalita, String immagine, List<Buffet> buffet) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.nazionalita = nazionalita;
+		this.immagine = immagine;
 		this.buffet = buffet;
 	}
 
@@ -56,6 +60,14 @@ public class Chef {
 
 	public void setNazionalita(String nazionalita) {
 		this.nazionalita = nazionalita;
+	}
+	
+	public String getImmagine() {
+		return this.immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
 	}
 
 	public List<Buffet> getBuffet() {

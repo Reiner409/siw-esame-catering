@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+ <html xmlns:th="http://www.thymeleaf.org"> 
 
 <head>
 <meta charset="UTF-8" />
@@ -10,9 +10,12 @@
 
 <body>
 	<div class="flex-container">
-
+		<div>
+			<a th:href="@{/login}">Login</a>
+			<a th:href="@{/caterings}">Caterings</a>
+		</div>
 		<div class="titleContainer">
-			<img class="bg-image" src="service.jpg" />
+			<img class="bg-image" src="/images/service.jpg" alt="Service picture" />
 
 			<div class="bg-text">
 				Scegli il tuo catering da <b>sogno!</b>
@@ -21,26 +24,79 @@
 		<div class="informationsBoxLeft">
 			<div class="informations">
 				<div>Da noi solo il massimo della</div>
-				<b>Qualità!</b>
+				<b>Qualita'!</b>
 			</div>
 			<div class="informationsImage">
-				<img src="/buffet3.png" />
+				<img src="/images/buffet3.png" alt="Buffet picture" />
 			</div>
 		</div>
 		<div class="informationsBoxRight">
-		
+
 			<div class="informationsImage">
-				<img src="/buffet1.png" />
+				<img src="/images/dessert.png" alt="Dessert picture" />
 			</div>
-			
+
 			<div class="informations">
 				<div>Facciamo di tutto per rispettare le</div>
 				<b>Tue Aspettative!</b>
 			</div>
-			
 		</div>
-		<div class="menus">
+		<div class="separator">
+			<div class="bg-text">Le nostre proposte</div>
+		</div>
+		<div class="chefs_container">
+			<div class="singleton_chef_container">
+				<img src="/images/chef_m1.jpg" class="chef_picture"
+					alt="Chef_1 picture" />
+				<div class="chefBuffetTextContainer">
+					<div class="chefBuffetText">
+						<h1>Titolo</h1>
+						<div>Cocktail di Gamberetti</div>
+						Ravioli
+					</div>
+				</div>
+			</div>
+			<div class="singleton_chef_container">
+				<img src="/images/chef_f1.jpg" class="chef_picture"
+					alt="Chef_1 picture" />
+				<div class="chefBuffetTextContainer">
+					<div class="chefBuffetText">
+						<h1>Titolo</h1>
+						<div>Cocktail di Gamberetti</div>
+						<div>Ravioli</div>
+					</div>
+				</div>
+			</div>
+			<div class="singleton_chef_container">
+				<img src="/images/chef_m2.jpg" class="chef_picture"
+					alt="Chef_1 picture" />
+				<div class="chefBuffetTextContainer">
+					<div class="chefBuffetText">
+						<h1>Titolo</h1>
+						<div>Cocktail di Gamberetti</div>
+						Ravioli
+					</div>
+				</div>
+			</div>
+			<div class="singleton_chef_container">
+				<img src="/images/chef_f2.jpg" class="chef_picture"
+					alt="Chef_1 picture" />
+				<div class="chefBuffetTextContainer">
+					<div class="chefBuffetText">
+						<h1>Titolo</h1>
+						<div>Cocktail di Gamberetti</div>
+						Ravioli
+					</div>
+				</div>
+			</div>
+		</div>
 		
+		<div class="separator">
+			<div class="bg-text">Visualizza tutti i catering</div>
+		</div>
+		
+		<div class="separator">
+			<div class="bg-text">Contattaci ora <br>+39 xxx xxx xxxx</div>
 		</div>
 	</div>
 </body>

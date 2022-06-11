@@ -1,13 +1,13 @@
-package it.uniroma3.siw.main;
+package it.uniroma3.siw;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Main {
+public class Catering {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Main.class, args);
+		SpringApplication.run(Catering.class, args);
 	}
 
 }

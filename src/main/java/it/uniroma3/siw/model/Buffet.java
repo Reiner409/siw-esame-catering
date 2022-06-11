@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,7 +22,7 @@ public class Buffet {
 	@Column(nullable = false)
 	private String description;
 	
-	@OneToMany
+	@ManyToMany
 	private List<Piatto> piatti;
 
 	public Buffet(String name, String description, List<Piatto> piatti) {

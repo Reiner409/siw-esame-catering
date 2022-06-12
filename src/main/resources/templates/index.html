@@ -4,15 +4,17 @@
 
 <head>
 <meta charset="UTF-8" />
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="/css/style.css" />
 <title>index</title>
 </head>
 
 <body>
 	<div class="flex-container">
 		<div>
-			<a th:href="@{/login}">Login</a>
-			<a th:href="@{/caterings}">Caterings</a>
+			<p><a th:href="@{/login}">Login</a></p>
+			<p><a th:href="@{/logout}">Logout</a></p>
+			<p><a th:href="@{/caterings}">Caterings</a></p>
+			<p><a th:href="@{/admin/home}">Admin Commands</a></p>
 		</div>
 		<div class="titleContainer">
 			<img class="bg-image" src="/images/service.jpg" alt="Service picture" />
@@ -45,50 +47,21 @@
 			<div class="bg-text">Le nostre proposte</div>
 		</div>
 		<div class="chefs_container">
-			<div class="singleton_chef_container">
-				<img src="/images/chef_m1.jpg" class="chef_picture"
-					alt="Chef_1 picture" />
+		
+			<div class="singleton_chef_container" th:each="buffet : ${buffets}">
+				<img th:src="@{${'images/' + buffet.chef.id +'_'+ buffet.chef.name + '.png'}}"
+					class="chef_picture" alt="Chef picture"/>
+
 				<div class="chefBuffetTextContainer">
 					<div class="chefBuffetText">
-						<h1>Titolo</h1>
-						<div>Cocktail di Gamberetti</div>
-						Ravioli
+						<h1 th:text="@{buffet.nome}">a</h1>
+						<div th:each="piatto : ${buffet.piatti}">
+							<div th:text="@{piatto.nome}">piatto</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="singleton_chef_container">
-				<img src="/images/chef_f1.jpg" class="chef_picture"
-					alt="Chef_1 picture" />
-				<div class="chefBuffetTextContainer">
-					<div class="chefBuffetText">
-						<h1>Titolo</h1>
-						<div>Cocktail di Gamberetti</div>
-						<div>Ravioli</div>
-					</div>
-				</div>
-			</div>
-			<div class="singleton_chef_container">
-				<img src="/images/chef_m2.jpg" class="chef_picture"
-					alt="Chef_1 picture" />
-				<div class="chefBuffetTextContainer">
-					<div class="chefBuffetText">
-						<h1>Titolo</h1>
-						<div>Cocktail di Gamberetti</div>
-						Ravioli
-					</div>
-				</div>
-			</div>
-			<div class="singleton_chef_container">
-				<img src="/images/chef_f2.jpg" class="chef_picture"
-					alt="Chef_1 picture" />
-				<div class="chefBuffetTextContainer">
-					<div class="chefBuffetText">
-						<h1>Titolo</h1>
-						<div>Cocktail di Gamberetti</div>
-						Ravioli
-					</div>
-				</div>
-			</div>
+
 		</div>
 		
 		<div class="separator">

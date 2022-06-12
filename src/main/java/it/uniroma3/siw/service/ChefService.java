@@ -42,4 +42,17 @@ public class ChefService implements IServices<Chef> {
 		return false;
 	}
 
+	public List<Chef> findFour() {
+		int counter = 0;
+		List<Chef> chefs = new LinkedList<Chef>();
+
+		for (Chef c : chefRepository.findAll()) {
+			if(counter==3)
+				break;
+			chefs.add(c);
+			counter++;
+		}
+		return chefs;
+	}
+
 }

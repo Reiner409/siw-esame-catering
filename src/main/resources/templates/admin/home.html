@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="/css/style.css" />
+<title>index</title>
+</head>
+
+<body>
+	
+	<p>Creazioni</p>
+	<ul>
+		<li><a th:href="@{/admin/createchef}">Crea Chef</a></li>
+		<li><a th:href="@{/admin/createbuffet}">Crea Buffet</a></li>
+		<li><a th:href="@{/admin/createpiatto}">Crea Piatto</a></li>
+		<li><a th:href="@{/admin/createingredient}">Crea Ingrediente</a></li>
+	</ul>
+	<p>Distruzioni</p>
+	<ul>
+		<li><a th:href="@{/admin/deletechef}">Elimina Chef</a></li>
+		<li><a th:href="@{/admin/deletebuffet}">Elimina Buffet</a></li>
+		<li><a th:href="@{/admin/deletepiatto}">Elimina Piatto</a></li>
+		<li><a th:href="@{/admin/deleteingredient}">Elimina Ingrediente</a></li>
+	</ul>
+	
+</body>
+</html>

@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Buffet {
@@ -22,6 +22,8 @@ public class Buffet {
 	@Column(nullable = false)
 	private String description;
 	
+	@ManyToOne
+	private Chef chef;
 	@ManyToMany
 	private List<Piatto> piatti;
 

@@ -54,11 +54,7 @@ public class MainController {
 		return "admin/createBuffet";
 	}
 	
-	@GetMapping("/admin/createingredient")
-	public String createIngredient(Model model)
-	{
-		return "admin/createIngredient";
-	}
+
 	
 	@GetMapping("/admin/createpiatto")
 	public String createPlate(Model model)

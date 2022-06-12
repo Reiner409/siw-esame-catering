@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="/css/style.css" />
+<title>index</title>
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div>
+		<h4 th:text="#{header.registra}">Creazione avvenuta con successo</h4>
+	</div>
+	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+
+</body>
+</html>

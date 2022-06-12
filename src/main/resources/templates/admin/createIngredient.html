@@ -7,7 +7,41 @@
 <link rel="stylesheet" href="/css/style.css" />
 <title>index</title>
 </head>
-
 <body>
+<header th:replace="fragments/base.html :: intestazione"></header>
+	<div>
+    	<h4 th:text="#{header.registra}">Creazione Ingrediente</h4>
+	<form th:action="@{/admin/createingredient}" method="POST">
+    <table>
+        <tr>
+            <td>Nome</td>
+            <td><input type="text" placeholder="Nome dell'ingrediente" required
+                       th:field="${ingrediente.nome}"/></td>
+            <td th:if="${#fields.hasErrors('ingrediente.nome')}"
+                th:errors="${ingrediente.nome}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td>Origine</td>
+            <td><input type="text" placeholder="Origine dell'ingrediente" required
+                       th:field="${ingrediente.origine}"/></td>
+            <td th:if="${#fields.hasErrors('ingrediente.origine')}"
+                th:errors="${ingrediente.origine}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td>Descrizione</td>
+            <td><input type="text" placeholder="Descrizione dell'ingrediente" required
+                       th:field="${ingrediente.descrizione}"/></td>
+            <td th:if="${#fields.hasErrors('ingrediente.descrizione')}"
+                th:errors="${ingrediente.descrizione}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Crea Ingrediente</button>
+            </td>
+        </tr>
+    </table>
+	</form>
+	</div>
+    <footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

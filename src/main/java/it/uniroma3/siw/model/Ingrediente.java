@@ -28,6 +28,10 @@ public class Ingrediente {
 		this.origine = origine;
 		this.descrizione = descrizione;
 	}
+	
+	public Ingrediente() {
+
+	}
 
 	public Long getId() {
 		return id;

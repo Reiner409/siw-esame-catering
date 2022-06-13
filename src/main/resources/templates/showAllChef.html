@@ -10,7 +10,17 @@
 
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
-		
+	<div class="showAllContainer">
+		<div th:each="chef : ${chefs}" class="showAll">
+			<a th:href="'/show/chef/' + {chef.id}">
+				<button>
+					<img th:src="${chef.immagine}" />
+					<p th:text="${chef.getNominativo()}" />
+					<p th:text="${buffet.nazionalita}" />
+				</button>
+			</a>
+		</div>
+	</div>
 	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

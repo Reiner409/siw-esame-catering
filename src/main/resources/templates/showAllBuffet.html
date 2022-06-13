@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="/css/style.css" />
+<title>index</title>
+</head>
+
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div class="showAllContainer">
+		<div th:each="buffet : ${buffets}" class="showAll">
+			<a th:href="'/show/buffet/' + ${buffet.id}">
+				<button>
+					<img th:src="${buffet.immagine}" />
+					<p th:text="${buffet.nome}" />
+					<p th:text="${buffet.descrizione}" />
+					<p th:text="${buffet.getChef().getNominativo()}" />
+				</button>
+			</a>
+		</div>
+	</div>
+	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+</body>
+</html>

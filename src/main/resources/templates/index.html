@@ -26,8 +26,7 @@
                 </p>
             </div>
             <div class="titleContainer">
-                <img class="bg-image" src="/images/service.jpg" alt="Service picture" />
-
+                <img class="bg-image" src="/images/service.png" alt="Service picture" />
                 <div class="bg-text">Scegli il tuo catering da <b>sogno!</b></div>
             </div>
             <div class="informationsBoxLeft">
@@ -55,7 +54,6 @@
             <div class="chefs_container">
                 <div class="singleton_chef_container" th:each="buffet : ${buffets}">
                     <img th:src="${buffet.getChefImmagine()}" class="chef_picture" alt="Chef picture" />
-
                     <div class="chefBuffetTextContainer">
                         <div class="chefBuffetText">
                             <h1 th:text="${buffet.nome}">a</h1>
@@ -69,10 +67,9 @@
 
             <div class="separator">
                 <div class="bg-text">
-                    <a th:href="caterings">Visualizza tutti i catering</a>
+                    <a th:href="'/show/allbuffet'">Visualizza tutti i catering</a>
                 </div>
             </div>
-
             <div class="separator">
                 <div class="bg-text">
                     Contattaci ora <br/>

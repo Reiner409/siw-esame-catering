@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +26,21 @@ public class ChefController {
 	ChefValidator chefValidator;
 
 
+	@GetMapping("/show/allchef")
+	public String getChefs(Model model)
+	{
+		model.addAttribute("chefs", this.chefService.findAll());
+		return "showAllChef";
+	}
+	
+	@GetMapping("/show/chef/{id}")
+	public String mostraChef(@PathVariable("id") Long id, Model model)
+	{
+		Chef chef = chefService.findById(id);
+		model.addAttribute("chef", chef);
+		return "visualizzaChef";
+	}
+	
 	@GetMapping("/admin/createchef")
 	public String createChef(Model model) {
 		model.addAttribute("chef", new Chef());

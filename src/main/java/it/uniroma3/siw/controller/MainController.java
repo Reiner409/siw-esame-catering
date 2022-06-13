@@ -33,12 +33,7 @@ public class MainController {
 		return "index";
 	}
 		
-	@GetMapping("/show/caterings")
-	public String getCaterings(Model model)
-	{
-		return "caterings";
-	}
-	
+
 	@GetMapping("/admin/home")
 	public String getAdminHome(Model model)
 	{

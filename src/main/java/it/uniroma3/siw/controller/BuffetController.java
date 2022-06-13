@@ -32,6 +32,14 @@ public class BuffetController {
 	PiattoService piattoService;
 	
 	
+	@GetMapping("/show/allbuffet")
+	public String getBuffets(Model model)
+	{
+		model.addAttribute("buffets", this.buffetService.findAll());
+		return "showAllBuffet";
+	}
+	
+	
 	@GetMapping("/show/buffet/{id}")
 	public String mostraBuffet(@PathVariable("id") Long id, Model model)
 	{

@@ -10,6 +10,24 @@
 
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div class="showContainer">
+		<div class="show">
+			<img th:src="${piatto.immagine}" class="show"
+				alt="plate picture" />
+		</div>
+		<div class="show">
+			<div class="BuffetTextContainer">
+				<div class="chefBuffetText">
+					<h1 th:text="${piatto.nome}">Nome</h1>
+					<h1 th:text="${piatto.descrizione}">Descrizione</h1>
+					<div th:each="ingrediente : ${piatto.ingredienti}">
+						<a th:href="@{'/show/ingrediente/' + ${ingrediente.id}}"
+							th:text="${ingrediente.nome}"> Ingrediente </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

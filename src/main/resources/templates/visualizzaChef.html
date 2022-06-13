@@ -10,6 +10,23 @@
 
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
+	<h4>Dettagli chef</h4>
+	<div class="showContainer">
+		<div class="show">
+			<img th:src="${chef.immagine}" class="show"
+				alt="Chef picture" />
+		</div>
+		<div class="show">
+			<div class="chefBuffetText">
+				<h1 th:text="${chef.getNominativo()}">Nome e Cognome</h1>
+				<h1 th:text="${chef.nazionalita}">Nazionalita</h1>
+				<div th:each="buffet : ${chef.buffet}">
+					<a th:href="@{'/show/buffet' + '/' + ${buffet.id}}"
+						th:text="${buffet.nome}"> Buffet </a>
+				</div>
+			</div>
+		</div>
+	</div>
 	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

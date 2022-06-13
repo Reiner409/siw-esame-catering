@@ -8,7 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Piatto {
@@ -22,14 +22,21 @@ public class Piatto {
 
 	@Column(nullable = false)
 	private String descrizione;
+	
+	
+	@Column(nullable = true)
+	private String immagine;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Ingrediente> ingredienti;
 
 	public Piatto(String nome, String descrizione, List<Ingrediente> ingredienti) {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.ingredienti = ingredienti;
+	}
+	
+	public Piatto() {
 	}
 
 	public String getNome() {
@@ -59,5 +66,15 @@ public class Piatto {
 	public Long getId() {
 		return id;
 	}
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
+	
+	
 
 }

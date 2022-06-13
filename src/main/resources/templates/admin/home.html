@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	
+	<header th:replace="fragments/base.html :: intestazione"></header>
 	<p>Creazioni</p>
 	<ul>
 		<li><a th:href="@{/admin/createchef}">Crea Chef</a></li>
@@ -22,8 +22,9 @@
 		<li><a th:href="@{/admin/deletechef}">Elimina Chef</a></li>
 		<li><a th:href="@{/admin/deletebuffet}">Elimina Buffet</a></li>
 		<li><a th:href="@{/admin/deletepiatto}">Elimina Piatto</a></li>
-		<li><a th:href="@{/admin/deleteingredient}">Elimina Ingrediente</a></li>
+		<li><a th:href="@{/admin/deleteingredient}">Elimina
+				Ingrediente</a></li>
 	</ul>
-	
+	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

@@ -7,7 +7,10 @@
 <link rel="stylesheet" href="/css/style.css" />
 <title>caterings</title>
 </head>
-	<body>
-		<p>Qui troverete tutti i nostri catering</p>
-	</body>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<p>Qui troverete tutti i nostri catering</p>
+	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+
+</body>
 </html>

@@ -7,6 +7,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.controller.validator.IngredienteValidator;
 import it.uniroma3.siw.model.Ingrediente;
@@ -24,14 +26,14 @@ public class IngredientController {
 	@GetMapping("/admin/createingredient")
 	public String createIngredient(Model model)
 	{
-		Ingrediente ingrediente = new Ingrediente();
-		model.addAttribute("ingrediente", ingrediente);
+		model.addAttribute("ingrediente", new Ingrediente());
 		return "admin/createIngredient";
 	}
 	
 	
 	@PostMapping("/admin/createingredient")
 	public String creaIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente,
+			@RequestParam("file") MultipartFile image,
 			BindingResult ingredienteBindingResult,
 			Model model)
 	{
@@ -40,12 +42,20 @@ public class IngredientController {
 		if(!ingredienteBindingResult.hasErrors())
 		{
 			ingredienteService.save(ingrediente);
+			ingrediente.setImmagine(Shared.SavePicture(ingrediente.getId(), "/images/ingrediente/", image));
+			ingredienteService.save(ingrediente);
 			return "admin/creationSuccess";
 		}
 		else
 		{
 			return "admin/createIngredient";
 		}
+	}
+	
+	@GetMapping("/admin/deleteingredient")
+	public String deleteIngredient(Model model)
+	{
+		return "admin/deleteIngredient";
 	}
 	
 	

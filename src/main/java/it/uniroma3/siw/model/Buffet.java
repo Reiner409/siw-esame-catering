@@ -18,9 +18,12 @@ public class Buffet {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String name;
+	private String nome;
 	@Column(nullable = false)
-	private String description;
+	private String descrizione;
+	
+	@Column(nullable = true)
+	private String immagine;
 	
 	@ManyToOne
 	private Chef chef;
@@ -28,29 +31,32 @@ public class Buffet {
 	private List<Piatto> piatti;
 
 	public Buffet(String name, String description, List<Piatto> piatti) {
-		this.name = name;
-		this.description = description;
+		this.nome = name;
+		this.descrizione = description;
 		this.piatti = piatti;
+	}
+	
+	public Buffet() {
 	}
 	
 	public Long getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescrizione() {
+		return descrizione;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 	public List<Piatto> getPiatti() {
@@ -61,8 +67,26 @@ public class Buffet {
 		this.piatti = piatti;
 	}
 	
-	
-	
+	public String getChefImmagine()
+	{
+		return this.chef.getImmagine();
+	}
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
+
+	public Chef getChef() {
+		return chef;
+	}
+
+	public void setChef(Chef chef) {
+		this.chef = chef;
+	}
 	
 	
 }

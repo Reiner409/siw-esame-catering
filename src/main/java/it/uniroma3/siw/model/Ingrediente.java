@@ -23,6 +23,10 @@ public class Ingrediente {
 	private String descrizione;
 	
 	
+	@Column(nullable = true)
+	private String immagine;
+	
+	
 	public Ingrediente(String nome, String origine, String descrizione) {
 		this.nome = nome;
 		this.origine = origine;
@@ -65,5 +69,15 @@ public class Ingrediente {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
+	
+	
 	
 }

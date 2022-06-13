@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ public class Chef {
 	@Column(nullable = false)
 	private String nazionalita;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String immagine;
 	
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE} )
@@ -36,6 +37,10 @@ public class Chef {
 		this.nazionalita = nazionalita;
 		this.immagine = immagine;
 		this.buffet = buffet;
+	}
+	
+	public Chef() {
+		this.buffet = new LinkedList<>();
 	}
 
 	public String getNome() {
@@ -63,7 +68,7 @@ public class Chef {
 	}
 	
 	public String getImmagine() {
-		return this.immagine;
+		return immagine;
 	}
 
 	public void setImmagine(String immagine) {
@@ -80,6 +85,11 @@ public class Chef {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getNominativo()
+	{
+		return this.nome + " " + this.cognome;
 	}
 		
 	

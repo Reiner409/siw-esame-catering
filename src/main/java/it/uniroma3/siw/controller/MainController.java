@@ -18,7 +18,7 @@ public class MainController {
 	@Autowired
 	ChefService chefService;
 	
-	@GetMapping(path = {"/index", "/"})
+	@GetMapping(path = {"/index", "/", ""})
 	public String getIndex(Model model)
 	{
 		List<Chef> chefs = chefService.findFour();
@@ -27,10 +27,13 @@ public class MainController {
 		{
 			buffets.add((Buffet) chef.getBuffet().toArray()[0]);
 		}
+		
+		model.addAttribute("buffets", buffets);
+		model.addAttribute("chefs", chefs);
 		return "index";
 	}
 		
-	@GetMapping("/caterings")
+	@GetMapping("/show/caterings")
 	public String getCaterings(Model model)
 	{
 		return "caterings";
@@ -40,49 +43,5 @@ public class MainController {
 	public String getAdminHome(Model model)
 	{
 		return "admin/home";
-	}
-	
-	@GetMapping("/admin/createchef")
-	public String createChef(Model model)
-	{
-		return "admin/createChef";
-	}
-	
-	@GetMapping("/admin/createbuffet")
-	public String createBuffet(Model model)
-	{
-		return "admin/createBuffet";
-	}
-	
-
-	
-	@GetMapping("/admin/createpiatto")
-	public String createPlate(Model model)
-	{
-		return "admin/createPiatto";
-	}
-	
-	@GetMapping("/admin/deletechef")
-	public String deleteChef(Model model)
-	{
-		return "admin/deleteChef";
-	}
-	
-	@GetMapping("/admin/deletebuffet")
-	public String deleteBuffet(Model model)
-	{
-		return "admin/deleteBuffet";
-	}
-	
-	@GetMapping("/admin/deleteingredient")
-	public String deleteIngredient(Model model)
-	{
-		return "admin/deleteIngredient";
-	}
-	
-	@GetMapping("/admin/deletepiatto")
-	public String deletePlate(Model model)
-	{
-		return "admin/deletePiatto";
 	}
 }

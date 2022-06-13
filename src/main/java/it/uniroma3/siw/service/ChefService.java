@@ -1,5 +1,6 @@
 package it.uniroma3.siw.service;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,11 +47,16 @@ public class ChefService implements IServices<Chef> {
 		int counter = 0;
 		List<Chef> chefs = new LinkedList<Chef>();
 
-		for (Chef c : chefRepository.findAll()) {
-			if(counter==3)
+		List<Chef> allChefs = this.findAll();
+		Collections.shuffle(allChefs);
+		
+		for (Chef c : allChefs) {
+			if (counter == 3)
 				break;
-			chefs.add(c);
-			counter++;
+			if (c.getBuffet().size() != 0) {
+				chefs.add(c);
+				counter++;
+			}
 		}
 		return chefs;
 	}

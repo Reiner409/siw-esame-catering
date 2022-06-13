@@ -1,76 +1,85 @@
 <!DOCTYPE html>
 
- <html xmlns:th="http://www.thymeleaf.org"> 
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <title>index</title>
+    </head>
 
-<head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="/css/style.css" />
-<title>index</title>
-</head>
+    <body>
+        <header th:replace="fragments/base.html :: intestazione"></header>
 
-<body>
-	<div class="flex-container">
-		<div>
-			<p><a th:href="@{/login}">Login</a></p>
-			<p><a th:href="@{/logout}">Logout</a></p>
-			<p><a th:href="@{/caterings}">Caterings</a></p>
-			<p><a th:href="@{/admin/home}">Admin Commands</a></p>
-		</div>
-		<div class="titleContainer">
-			<img class="bg-image" src="/images/service.jpg" alt="Service picture" />
+        <div class="flex-container">
+            <div>
+                <p>
+                    <a th:href="@{/login}">Login</a>
+                </p>
+                <p>
+                    <a th:href="@{/logout}">Logout</a>
+                </p>
+                <p>
+                    <a th:href="@{/caterings}">Caterings</a>
+                </p>
+                <p>
+                    <a th:href="@{/admin/home}">Admin Commands</a>
+                </p>
+            </div>
+            <div class="titleContainer">
+                <img class="bg-image" src="/images/service.jpg" alt="Service picture" />
 
-			<div class="bg-text">
-				Scegli il tuo catering da <b>sogno!</b>
-			</div>
-		</div>
-		<div class="informationsBoxLeft">
-			<div class="informations">
-				<div>Da noi solo il massimo della</div>
-				<b>Qualita'!</b>
-			</div>
-			<div class="informationsImage">
-				<img src="/images/buffet3.png" alt="Buffet picture" />
-			</div>
-		</div>
-		<div class="informationsBoxRight">
+                <div class="bg-text">Scegli il tuo catering da <b>sogno!</b></div>
+            </div>
+            <div class="informationsBoxLeft">
+                <div class="informations">
+                    <div>Da noi solo il massimo della</div>
+                    <b>Qualita'!</b>
+                </div>
+                <div class="informationsImage">
+                    <img src="/images/buffet3.png" alt="Buffet picture" />
+                </div>
+            </div>
+            <div class="informationsBoxRight">
+                <div class="informationsImage">
+                    <img src="/images/dessert.png" alt="Dessert picture" />
+                </div>
 
-			<div class="informationsImage">
-				<img src="/images/dessert.png" alt="Dessert picture" />
-			</div>
+                <div class="informations">
+                    <div>Facciamo di tutto per rispettare le</div>
+                    <b>Tue Aspettative!</b>
+                </div>
+            </div>
+            <div class="separator">
+                <div class="bg-text">Le nostre proposte</div>
+            </div>
+            <div class="chefs_container">
+                <div class="singleton_chef_container" th:each="buffet : ${buffets}">
+                    <img th:src="${buffet.getChefImmagine()}" class="chef_picture" alt="Chef picture" />
 
-			<div class="informations">
-				<div>Facciamo di tutto per rispettare le</div>
-				<b>Tue Aspettative!</b>
-			</div>
-		</div>
-		<div class="separator">
-			<div class="bg-text">Le nostre proposte</div>
-		</div>
-		<div class="chefs_container">
-		
-			<div class="singleton_chef_container" th:each="buffet : ${buffets}">
-				<img th:src="@{${'images/' + buffet.chef.id +'_'+ buffet.chef.name + '.png'}}"
-					class="chef_picture" alt="Chef picture"/>
+                    <div class="chefBuffetTextContainer">
+                        <div class="chefBuffetText">
+                            <h1 th:text="${buffet.nome}">a</h1>
+                            <div th:each="piatto : ${buffet.piatti}">
+                                <div th:text="${piatto.nome}">piatto</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-				<div class="chefBuffetTextContainer">
-					<div class="chefBuffetText">
-						<h1 th:text="@{buffet.nome}">a</h1>
-						<div th:each="piatto : ${buffet.piatti}">
-							<div th:text="@{piatto.nome}">piatto</div>
-						</div>
-					</div>
-				</div>
-			</div>
+            <div class="separator">
+                <div class="bg-text">
+                    <a th:href="caterings">Visualizza tutti i catering</a>
+                </div>
+            </div>
 
-		</div>
-		
-		<div class="separator">
-			<div class="bg-text">Visualizza tutti i catering</div>
-		</div>
-		
-		<div class="separator">
-			<div class="bg-text">Contattaci ora <br>+39 xxx xxx xxxx</div>
-		</div>
-	</div>
-</body>
+            <div class="separator">
+                <div class="bg-text">
+                    Contattaci ora <br/>
+                    +39 xxx xxx xxxx
+                </div>
+            </div>
+        </div>
+        <footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+    </body>
 </html>

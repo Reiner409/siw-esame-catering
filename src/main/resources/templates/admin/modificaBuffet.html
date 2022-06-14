@@ -12,29 +12,29 @@
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div>
 		<h4 th:text="#{header.registra}">Modifica Buffet</h4>
-		<form method="POST" enctype="multipart/form-data" th:action="@{'/admin/modificabuffet/' + ${buffet.id}}">
+		<form method="POST" enctype="multipart/form-data" th:action="@{'/admin/modificabuffet/' + ${buffet.id}}" th:object="${buffet}">
 			<table>
 				<tr>
 					<td>Nome</td>
 					<td><input type="text" placeholder="Nome del Buffet" required
-						th:field="${buffet.nome}" /></td>
-					<td th:if="${#fields.hasErrors('buffet.nome')}"
-						th:errors="${buffet.nome}" th:style="'color:red'"></td>
+						th:field="*{nome}" /></td>
+					<td th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}" th:style="'color:red'"></td>
 				</tr>
 				<tr>
 					<td>Descrizione</td>
 					<td><input type="text" placeholder="Descrizione del Buffet"
-						required th:field="${buffet.descrizione}" /></td>
-					<td th:if="${#fields.hasErrors('buffet.descrizione')}"
-						th:errors="${buffet.descrizione}" th:style="'color:red'"></td>
+						required th:field="*{descrizione}" /></td>
+					<td th:if="${#fields.hasErrors('descrizione')}"
+						th:errors="*{descrizione}" th:style="'color:red'"></td>
 				</tr>
 				<tr>
 					<td>Modifica chef:</td>
 					<td><select th:name="idchef">
 							<option value="0">Seleziona uno Chef</option>
-							<option th:each="chef : ${chefs}" th:value="${chef.id}"
-								th:text="${chef.nome} + ' '+ ${chef.cognome}"
-								th:selected="${chef == buffet.chef}"></option>
+							<option th:each="che : ${chefs}" th:value="${che.id}"
+								th:text="${che.nome} + ' '+ ${che.cognome}"
+								th:selected="${che.equals(chef)}"></option>
 					</select></td>
 				</tr>
 				<tr>
@@ -44,9 +44,15 @@
 							<li th:each="piatto : ${piatti}">
 							<input type="checkbox"
 								th:value="${piatto.id}" th:text="${piatto.nome}"
-								th:name="idpiatti" th:checked="${buffet.getPiatti().contains(piatto)}"/></li>
+								th:name="idpiatti" th:checked="${piattiSelected.contains(piatto)}"/></li>
 						</ul>
 					</td>
+				</tr>
+				<tr>
+					<div th:if="${#fields.hasErrors('global')}">
+						<h3>Global errors:</h3>
+						<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+					</div>
 				</tr>
 				<tr>
 					<td>
@@ -55,9 +61,16 @@
 					</td>
 				</tr>
 				<tr>
+					<div th:if="${#fields.hasErrors('global')}">
+						<h3>Global errors:</h3>
+						<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+					</div>
+				</tr>
+				<tr>
 					<td>
-						<button type="submit">Modifica Buffet</button> 
-						<a th:href="@{'/admin/deletebuffet/' + ${buffet.id}}"><button type="button">Elimina Buffet</button></a> 
+						<button type="submit" class="login">Modifica Buffet</button> 
+						<a th:href="@{'/admin/deletebuffet/' + ${buffet.id}}" >
+						<button type="button" class="login">Elimina Buffet</button></a> 
 					</td>
 				</tr>
 			</table>

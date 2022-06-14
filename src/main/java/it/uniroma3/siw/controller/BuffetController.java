@@ -60,7 +60,9 @@ public class BuffetController {
 	{
 		Buffet buffet = buffetService.findById(id);
 		model.addAttribute("buffet", buffet);
+		model.addAttribute("chef", buffet.getChef());
 		model.addAttribute("piatti",this.piattoService.findAll());
+		model.addAttribute("piattiSelected",buffet.getPiatti());
 		model.addAttribute("chefs",this.chefService.findAll());
 		return "admin/modificaBuffet";
 	}
@@ -74,7 +76,7 @@ public class BuffetController {
 			@RequestParam("file") MultipartFile image,
 			Model model)
 	{
-		this.buffetValidator.validate(updated, buffetBindingResult);
+		this.buffetValidator.validateUpdate(updated, buffetBindingResult);
 		
 		if(!buffetBindingResult.hasErrors())
 		{

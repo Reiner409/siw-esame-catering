@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+     >
 
 <head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="/css/style.css" />
-<title>index</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>index</title>
 </head>
 
 <body>
-	<header th:replace="fragments/base.html :: intestazione"></header>
-	<h4>Dettagli Ingrediente</h4>
-	<div class="showContainer">
-		<div class="show">
-			<img th:src="${ingrediente.immagine}" class="show"
-				alt="Ingredient picture" />
-		</div>
-		<div class="show">
-			<div class="BuffetTextContainer">
-				<div class="chefBuffetText">
-					<h1 th:text="${ingrediente.nome}">Nome</h1>
-					<h1 th:text="${ingrediente.origine}">Origine</h1>
-					<h1 th:text="${ingrediente.descrizione}">Descrizione</h1>
-				</div>
-			</div>
-		</div>
-	</div>
-	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<h4>Dettagli Ingrediente</h4>
+<div class="showContainer">
+    <div class="show">
+        <img th:src="${ingrediente.immagine}" class="show"
+             alt="Ingredient picture"/>
+    </div>
+    <div class="show">
+        <div class="BuffetTextContainer">
+            <div class="chefBuffetText">
+                <h1 th:text="${ingrediente.nome}">Nome</h1>
+                <h1 th:text="${ingrediente.origine}">Origine</h1>
+                <h1 th:text="${ingrediente.descrizione}">Descrizione</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

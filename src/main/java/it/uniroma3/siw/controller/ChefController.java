@@ -73,7 +73,7 @@ public class ChefController {
 			@RequestParam("file") MultipartFile image,
 			BindingResult chefBindingResult, Model model) {
 
-		this.chefValidator.validate(chef, chefBindingResult);
+		this.chefValidator.validateUpdate(chef, chefBindingResult);
 
 		if (!chefBindingResult.hasErrors()) {
 			Chef original = this.chefService.findById(id);
@@ -81,8 +81,8 @@ public class ChefController {
 
 			chefService.save(original);
 			if (!image.isEmpty()) {
-				chef.setImmagine(Shared.SavePicture(chef.getId(), "/images/chef/", image));
-				chefService.save(chef);
+				original.setImmagine(Shared.SavePicture(original.getId(), "/images/chef/", image));
+				chefService.save(original);
 			}
 			return "admin/creationSuccess";
 		} else {

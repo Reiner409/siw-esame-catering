@@ -68,11 +68,6 @@ public class Buffet {
 		this.piatti = piatti;
 	}
 	
-	public String getChefImmagine()
-	{
-		return this.chef.getImmagine();
-	}
-
 	public String getImmagine() {
 		return immagine;
 	}
@@ -93,6 +88,5 @@ public class Buffet {
 		this.setNome(buffet.getNome());
 		this.setDescrizione(buffet.getDescrizione());
 	}
-	
 	
 }

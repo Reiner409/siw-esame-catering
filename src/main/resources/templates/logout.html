@@ -10,7 +10,12 @@
 
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
-
+	<form name="logoutForm" th:action="@{/logout}" method="post">
+		<p>Vuoi veramente effettuare il logout?</p>
+		<button type="submit" class="login">Logout</button>
+		<a th:href="@{'/index'}"><button type="button" class="login">Home</button></a>
+					
+	</form>
 	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

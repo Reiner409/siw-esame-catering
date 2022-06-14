@@ -10,21 +10,21 @@
 <header th:replace="fragments/base.html :: intestazione"></header>
 <div>
 	<h4 th:text="#{header.registra}">Creazione Ingrediente</h4>
-	<form th:action="@{/admin/createpiatto}" method="POST" enctype="multipart/form-data">
+	<form th:action="@{/admin/createpiatto}" method="POST" enctype="multipart/form-data" th:object="${piatto}">
 		<table>
 			<tr>
 				<td>Nome</td>
 				<td><input type="text" placeholder="Nome del piatto" required
-					th:field="${piatto.nome}" /></td>
-				<td th:if="${#fields.hasErrors('piatto.nome')}"
-					th:errors="${piatto.nome}" th:style="'color:red'"></td>
+					th:field="*{nome}" /></td>
+				<td th:if="${#fields.hasErrors('nome')}"
+					th:errors="*{nome}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td>Descrizione</td>
 				<td><input type="text" placeholder="Descrizione del piatto"
-					required th:field="${piatto.descrizione}" /></td>
-				<td th:if="${#fields.hasErrors('piatto.descrizione')}"
-					th:errors="${piatto.descrizione}" th:style="'color:red'"></td>
+					required th:field="*{descrizione}" /></td>
+				<td th:if="${#fields.hasErrors('descrizione')}"
+					th:errors="*{descrizione}" th:style="'color:red'"></td>
 			</tr>
 			<tr>	
 				<td>Seleziona gli ingredienti appartenenti al tuo piatto</td>
@@ -37,6 +37,12 @@
 				</td>
 			</tr>
 			<tr>
+				<div th:if="${#fields.hasErrors('global')}">
+					<h3>Global errors:</h3>
+					<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+				</div>
+			</tr>
+			<tr>
 				<td>
 					<p>Seleziona un'immagine:</p> <input type="file" accept="image/*"
 					class="custom-file-input" id="customFile" name="file">
@@ -44,7 +50,7 @@
 			</tr>
 			<tr>
 				<td>
-					<button type="submit">Crea Piatto</button>
+					<button type="submit" class="login">Crea Piatto</button>
 				</td>
 			</tr>
 		</table>

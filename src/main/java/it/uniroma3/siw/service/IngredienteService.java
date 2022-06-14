@@ -50,8 +50,11 @@ public class IngredienteService implements IServices<Ingrediente> {
 
 	@Override
 	public boolean alreadyExists(Ingrediente o) {
-		//We still have to see this part during the lessons.
-		return false;
+		List<Ingrediente> ingredienti = this.ingredienteRepository.findByNomeAndOrigineAndDescrizione(o.getNome(),o.getOrigine(), o.getDescrizione());
+		if (ingredienti.size() > 0)
+			return true;
+		else 
+			return false;
 	}
 
 }

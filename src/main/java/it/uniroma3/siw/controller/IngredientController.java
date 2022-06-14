@@ -48,7 +48,7 @@ public class IngredientController {
 	@PostMapping("/admin/createingrediente")
 	public String creaIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente,
 			@RequestParam("file") MultipartFile image, BindingResult ingredienteBindingResult, Model model) {
-		this.ingredienteValidator.validate(ingrediente, ingredienteBindingResult);
+		this.ingredienteValidator.validateUpdate(ingrediente, ingredienteBindingResult);
 
 		if (!ingredienteBindingResult.hasErrors()) {
 			ingredienteService.save(ingrediente);

@@ -278,7 +278,7 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-button {
+button.login{
   background-color: #1BA41C;
   color: white;
   padding: 14px 20px;

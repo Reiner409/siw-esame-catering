@@ -10,19 +10,22 @@
 
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
-
 	<div>
 		<h4>Login</h4>
 	</div>
 	<form th:action="@{/login}" method="POST">
 		<div class="flexContainer">
 			<div class="container">
-				<b>Username</b> <input type="text" placeholder="Enter Username"	name="username"> 
-				<b>Password</b> <input type="password" placeholder="Enter Password" name="password">
-				<button type="submit">Login</button>
+				<b>Username</b> <input type="text" placeholder="Enter Username"
+					name="username"> <b>Password</b> <input type="password"
+					placeholder="Enter Password" name="password">
+				<button class="login" type="submit">Login</button>
+				<a th:href="@{'/registerForm'}">
+					<button class="login" type="button">Sign up</button>
+				</a>
 			</div>
 		</div>
 	</form>
-		<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

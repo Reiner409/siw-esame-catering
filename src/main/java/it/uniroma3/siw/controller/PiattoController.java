@@ -84,10 +84,12 @@ public class PiattoController {
 	@GetMapping("/admin/modificapiatto/{id}")
 	public String aggiornaPiatto(@PathVariable("id") Long id, Model model)
 	{
-		model.addAttribute("piatto", this.piattoService.findById(id));
+		Piatto piatto = this.piattoService.findById(id);
+		model.addAttribute("piatto", piatto);
 		model.addAttribute("ingredienti", ingredienteService.findAll());
-		
-		return "admin/modificapiatto";
+		model.addAttribute("ingredientiSelected", piatto.getIngredienti());
+
+		return "admin/modificaPiatto";
 	}
 	
 	@PostMapping("/admin/modificapiatto/{id}")
@@ -98,7 +100,7 @@ public class PiattoController {
 			@RequestParam("file") MultipartFile image,
 			Model model)
 	{
-		this.piattoValidator.validate(piatto, piattoBindingResult);
+		this.piattoValidator.validateUpdate(piatto, piattoBindingResult);
 		
 		if(!piattoBindingResult.hasErrors())
 		{

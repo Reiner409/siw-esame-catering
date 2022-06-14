@@ -1,84 +1,95 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="/css/style.css" />
-        <title>index</title>
-    </head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>index</title>
+</head>
 
-    <body>
-        <header th:replace="fragments/base.html :: intestazione"></header>
+<body>
+<header th:replace="fragments/base.html :: intestazione"></header>
 
-        <div class="flex-container">
-            <div>
-                <p>
-                    <a th:href="@{/login}">Login</a>
-                </p>
-                <p>
-                    <a th:href="@{/logout}">Logout</a>
-                </p>
-                <p>
-                    <a th:href="@{/admin/home}">Admin Commands</a>
-                </p>
+<div class="flex-container">
+    <div>
+        <p>
+            <a th:href="@{/login}">Login</a>
+        </p>
+        <p>
+            <a th:href="@{/logout}">Logout</a>
+        </p>
+        <p>
+            <a th:href="@{/admin/home}">Admin Commands</a>
+        </p>
+        <p>
+        <h1>
+            <div sec:authorize-url="/admin">
+                This will only be displayed if authenticated user has a role computed by the controller.
             </div>
-            <div class="titleContainer">
-                <img class="bg-image" src="/images/service.png" alt="Service picture" />
-                <div class="bg-text">Scegli il tuo catering da <b>sogno!</b></div>
-            </div>
-            <div class="informationsBoxLeft">
-                <div class="informations">
-                    <div>Da noi solo il massimo della</div>
-                    <b>Qualita'!</b>
-                </div>
-                <div class="informationsImage">
-                    <img src="/images/buffet3.png" alt="Buffet picture" />
-                </div>
-            </div>
-            <div class="informationsBoxRight">
-                <div class="informationsImage">
-                    <img src="/images/dessert.png" alt="Dessert picture" />
-                </div>
+        </h1>
+        </p>
+    </div>
+    <div class="titleContainer">
+        <img class="bg-image" src="/images/service.png" alt="Service picture"/>
+        <div class="bg-text">Scegli il tuo catering da <b>sogno!</b></div>
+    </div>
+    <div class="informationsBoxLeft">
+        <div class="informations">
+            <div>Da noi solo il massimo della</div>
+            <b>Qualita'!</b>
+        </div>
+        <div class="informationsImage">
+            <img src="/images/buffet3.png" alt="Buffet picture"/>
+        </div>
+    </div>
+    <div class="informationsBoxRight">
+        <div class="informationsImage">
+            <img src="/images/dessert.png" alt="Dessert picture"/>
+        </div>
 
-                <div class="informations">
-                    <div>Facciamo di tutto per rispettare le</div>
-                    <b>Tue Aspettative!</b>
-                </div>
-            </div>
-            <div class="separator">
-                <div class="bg-text">Le nostre proposte</div>
-            </div>
-            <div class="chefs_container">
-                <div class="singleton_chef_container" th:each="buffet : ${buffets}">
-                    <img th:src="${buffet.getChefImmagine()}" class="chef_picture" alt="Chef picture" />
-                    <div class="chefBuffetTextContainer">
-                        <div class="chefBuffetText">
-                            <h1 th:text="${buffet.nome}">a</h1>
-                            <div th:each="piatto : ${buffet.piatti}">
-                                <div th:text="${piatto.nome}">piatto</div>
-                            </div>
-                        </div>
+        <div class="informations">
+            <div>Facciamo di tutto per rispettare le</div>
+            <b>Tue Aspettative!</b>
+        </div>
+    </div>
+    <div class="separator">
+        <div class="bg-text">Le nostre proposte</div>
+    </div>
+    <div class="chefs_container">
+        <div class="singleton_chef_container" th:each="buffet : ${buffets}">
+            <a th:href="@{'/show/chef/' + ${buffet.getChef().getId()}}">
+                <img th:src="${buffet.getChef().getImmagine()}" class="chef_picture" alt="Chef picture"/>
+            </a>
+            <div class="chefBuffetTextContainer">
+                <div class="chefBuffetText">
+                    <h1>
+                        <a th:href="@{'/show/buffet/' + ${buffet.id}}"
+                           th:text="${buffet.nome}"> a </a>
+                    </h1>
+                    <div th:each="piatto : ${buffet.piatti}">
+                        <div th:text="${piatto.nome}">piatto</div>
                     </div>
                 </div>
             </div>
-
-            <div class="separator">
-                <div class="bg-text">
-                    <a th:href="'/show/allbuffet'">Visualizza tutti i catering</a>
-                </div>
-            </div>
-            <div class="separator">
-                <div class="bg-text">
-                    <a th:href="'/show/allchef'">Visualizza tutti gli chef</a>
-                </div>
-            </div>
-            <div class="separator">
-                <div class="bg-text">
-                    Contattaci ora <br/>
-                    +39 xxx xxx xxxx
-                </div>
-            </div>
         </div>
-        <footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
-    </body>
+    </div>
+
+    <div class="separator">
+        <div class="bg-text">
+            <a th:href="'/show/allbuffet'">Visualizza tutti i catering</a>
+        </div>
+    </div>
+    <div class="separator">
+        <div class="bg-text">
+            <a th:href="'/show/allchef'">Visualizza tutti gli chef</a>
+        </div>
+    </div>
+    <div class="separator">
+        <div class="bg-text">
+            Contattaci ora <br/>
+            +39 xxx xxx xxxx
+        </div>
+    </div>
+</div>
+</body>
 </html>

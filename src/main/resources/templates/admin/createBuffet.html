@@ -3,64 +3,70 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="/css/style.css" />
-<title>index</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>index</title>
 </head>
 
 <body>
-	<header th:replace="fragments/base.html :: intestazione"></header>
-	<div>
-		<h4 th:text="#{header.registra}">Creazione Buffet</h4>
-		<form th:action="@{/admin/createbuffet}" method="POST"
-			enctype="multipart/form-data">
-			<table>
-				<tr>
-					<td>Nome</td>
-					<td><input type="text" placeholder="Nome del Buffet" required
-						th:field="${buffet.nome}" /></td>
-					<td th:if="${#fields.hasErrors('buffet.nome')}"
-						th:errors="${buffet.nome}" th:style="'color:red'"></td>
-				</tr>
-				<tr>
-					<td>Descrizione</td>
-					<td><input type="text" placeholder="Descrizione del Buffet"
-						required th:field="${buffet.descrizione}" /></td>
-					<td th:if="${#fields.hasErrors('buffet.descrizione')}"
-						th:errors="${buffet.descrizione}" th:style="'color:red'"></td>
-				</tr>
-				<tr>
-					<td>Seleziona lo chef:</td>
-					<td><select th:name="idchef">
-							<option value="0">Seleziona uno Chef</option>
-							<option th:each="chef : ${chefs}" th:value="${chef.id}"
-								th:text="${chef.nome} + ' '+ ${chef.cognome}"></option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Seleziona i piatti appartenenti al tuo buffet</td>
-					<td>
-						<ul>
-							<li th:each="piatto : ${piatti}"><input type="checkbox"
-								th:value="${piatto.id}" th:text="${piatto.nome}"
-								th:name="idpiatti" /></li>
-						</ul>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>Seleziona un'immagine:</p> <input type="file" accept="image/*"
-						class="custom-file-input" id="customFile" name="file">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<button type="submit">Crea Buffet</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
-	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<div>
+    <h4 th:text="#{header.registra}">Creazione Buffet</h4>
+    <form th:action="@{/admin/createbuffet}" method="POST"
+          enctype="multipart/form-data" th:object="${buffet}">
+        <table>
+            <tr>
+                <td>Nome</td>
+                <td><input type="text" placeholder="Nome del Buffet" required
+                           th:field="*{nome}"/></td>
+                <td th:if="${#fields.hasErrors('nome')}"
+                    th:errors="*{nome}" th:style="'color:red'"></td>
+            </tr>
+            <tr>
+                <td>Descrizione</td>
+                <td><input type="text" placeholder="Descrizione del Buffet"
+                           required th:field="*{descrizione}"/></td>
+                <td th:if="${#fields.hasErrors('descrizione')}"
+                    th:errors="*{descrizione}" th:style="'color:red'"></td>
+            </tr>
+            <tr>
+                <td>Seleziona lo chef:</td>
+                <td><select th:name="idchef">
+                    <option value="0">Seleziona uno Chef</option>
+                    <option th:each="chef : ${chefs}" th:value="${chef.id}"
+                            th:text="${chef.nome} + ' '+ ${chef.cognome}"></option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Seleziona i piatti appartenenti al tuo buffet</td>
+                <td>
+                    <ul>
+                        <li th:each="piatto : ${piatti}"><input type="checkbox"
+                                                                th:value="${piatto.id}" th:text="${piatto.nome}"
+                                                                th:name="idpiatti"/></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Seleziona un'immagine:</p> <input type="file" accept="image/*"
+                                                         class="custom-file-input" id="customFile" name="file">
+                </td>
+            </tr>
+            <tr>
+                <div th:if="${#fields.hasErrors('global')}">
+                    <h3>Global errors:</h3>
+                    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+                </div>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" class="login">Crea Buffet</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

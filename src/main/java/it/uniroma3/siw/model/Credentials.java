@@ -29,8 +29,8 @@ public class Credentials {
 	private User user;
 
 	
-	public static final String ADMIN_ROLE = "admin";
-	public static final String DEFAULT_ROLE = "user";
+	public static final String ADMIN_ROLE = "ADMIN";
+	public static final String DEFAULT_ROLE = "USER";
 
 	public Credentials(String username, String password, User user) {
 		this.username = username;

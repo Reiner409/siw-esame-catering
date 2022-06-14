@@ -30,16 +30,11 @@ public class AuthenticationController {
 	public String showLoginForm (Model model) {
 		return "loginForm";
 	}
-	
-	@PostMapping("/login") 
-	public String verifyLogin (Model model) {
-		return "loginForm";
-	}
-	
+		
 	@GetMapping("/logout") 
 	public String logout(Model model) {
-		return "index";
-	}
+		return "/logout";
+	}	
 	
     @GetMapping("/default")
     public String defaultAfterLogin(Model model) {

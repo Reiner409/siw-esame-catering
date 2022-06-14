@@ -101,6 +101,14 @@ public class Chef {
 		this.cognome = chef.getCognome();
 		this.nazionalita = chef.getNazionalita();
 	}
-		
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj!=null && obj.getClass().equals(this.getClass()))
+		{
+			Chef o = (Chef) obj;
+			return this.getId().equals(o.getId());
+		}
+		return false;
+	}
 }

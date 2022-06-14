@@ -1,5 +1,9 @@
 package it.uniroma3.siw.service;
 
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,31 +18,24 @@ public class CredentialsServices {
 	private CredentialsRepository credentialsRepository;
     @Autowired
     protected PasswordEncoder passwordEncoder;
-	//Maybe i need to add this autowired and get the user-id before getting the user by username
-	//@Autowired
-	//private UserRepository userRepository
-	
-	public Credentials getCredentials(Long id)
-	{
-		return credentialsRepository.findById(id).get();
+
+	@Transactional
+	public Credentials getCredentials(Long id) {
+		Optional<Credentials> result = this.credentialsRepository.findById(id);
+		return result.orElse(null);
 	}
-	
-	public Credentials getCredentials(String username)
-	{
-		return credentialsRepository.findByUsername(username);
+
+	@Transactional
+	public Credentials getCredentials(String username) {
+		Optional<Credentials> result = this.credentialsRepository.findByUsername(username);
+		return result.orElse(null);
 	}
-	
-	public Credentials saveCredentials(Credentials credentials)
-	{
-		credentials.setAdminRole();
+		
+    @Transactional
+    public Credentials saveCredentials(Credentials credentials) {
+        credentials.setDefaultRole();
         credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
         return this.credentialsRepository.save(credentials);
-   
-	}
+    }
 	
-	public Boolean alreadyExists(Credentials credentials)
-	{
-		//We still have to see this part during the lessons.
-		return false;
-	}
 }

@@ -52,8 +52,11 @@ public class PiattoService implements IServices<Piatto> {
 
 	@Override
 	public boolean alreadyExists(Piatto o) {
-		//We still have to see this part during the lessons.
-		return false;
+		List<Piatto> piatti = this.piattoRepository.findByNomeAndDescrizione(o.getNome(), o.getDescrizione());
+		if (piatti.size() > 0)
+			return true;
+		else 
+			return false;
 	}
 
 	public List<Piatto> findByIngrediente(Ingrediente ingrediente) {

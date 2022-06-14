@@ -28,6 +28,10 @@ public class Shared {
 				pictureFolder = path+id+".png";
 				
 			}
+			else
+			{
+				pictureFolder = path+"default.png";
+			}
 
 		} catch (Exception e) {
 			pictureFolder = path+"default.png";

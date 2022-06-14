@@ -45,8 +45,11 @@ public class BuffetService implements IServices<Buffet>{
 
 	@Override
 	public boolean alreadyExists(Buffet o) {
-		//We still have to see this part during the lessons.
-		return false;
+		List<Buffet> buffets = this.buffetRepository.findByNomeAndDescrizione(o.getNome(), o.getDescrizione());
+		if (buffets.size() > 0)
+			return true;
+		else 
+			return false;
 	}
 
 	@Override

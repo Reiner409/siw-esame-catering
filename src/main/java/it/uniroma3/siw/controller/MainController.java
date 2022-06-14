@@ -3,6 +3,7 @@ package it.uniroma3.siw.controller;
 import java.util.LinkedList;
 import java.util.List;
 
+import it.uniroma3.siw.model.Credentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,7 @@ public class MainController {
 		model.addAttribute("chefs", chefs);
 		return "index";
 	}
-		
+	
 
 	@GetMapping("/admin/home")
 	public String getAdminHome(Model model)

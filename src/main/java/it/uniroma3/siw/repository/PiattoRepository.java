@@ -11,4 +11,6 @@ public interface PiattoRepository extends CrudRepository<Piatto, Long>{
 
 	List<Piatto> findByIngredienti(Ingrediente ingrediente);
 
+	List<Piatto> findByNomeAndDescrizione(String nome, String descrizione);
+
 }

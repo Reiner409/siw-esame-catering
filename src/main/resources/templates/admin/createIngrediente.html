@@ -11,29 +11,29 @@
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div>
 		<h4 th:text="#{header.registra}">Creazione Ingrediente</h4>
-		<form th:action="@{/admin/createingrediente}" method="POST" enctype="multipart/form-data">
+		<form th:action="@{/admin/createingrediente}" method="POST" enctype="multipart/form-data" th:object="${ingrediente}">
 			<table>
 				<tr>
 					<td>Nome</td>
 					<td><input type="text" placeholder="Nome dell'ingrediente"
-						required th:field="${ingrediente.nome}" /></td>
-					<td th:if="${#fields.hasErrors('ingrediente.nome')}"
-						th:errors="${ingrediente.nome}" th:style="'color:red'"></td>
+						required th:field="*{nome}" /></td>
+					<td th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}" th:style="'color:red'"></td>
 				</tr>
 				<tr>
 					<td>Origine</td>
 					<td><input type="text" placeholder="Origine dell'ingrediente"
-						required th:field="${ingrediente.origine}" /></td>
-					<td th:if="${#fields.hasErrors('ingrediente.origine')}"
-						th:errors="${ingrediente.origine}" th:style="'color:red'"></td>
+						required th:field="*{origine}" /></td>
+					<td th:if="${#fields.hasErrors('origine')}"
+						th:errors="*{origine}" th:style="'color:red'"></td>
 				</tr>
 				<tr>
 					<td>Descrizione</td>
 					<td><input type="text"
 						placeholder="Descrizione dell'ingrediente" required
-						th:field="${ingrediente.descrizione}" /></td>
-					<td th:if="${#fields.hasErrors('ingrediente.descrizione')}"
-						th:errors="${ingrediente.descrizione}" th:style="'color:red'"></td>
+						th:field="*{descrizione}" /></td>
+					<td th:if="${#fields.hasErrors('descrizione')}"
+						th:errors="*{descrizione}" th:style="'color:red'"></td>
 				</tr>
 				<tr>
 					<td>
@@ -42,8 +42,14 @@
 					</td>
 				</tr>
 				<tr>
+					<div th:if="${#fields.hasErrors('global')}">
+						<h3>Global errors:</h3>
+						<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+					</div>
+				</tr>
+				<tr>
 					<td>
-						<button type="submit">Crea Ingrediente</button>
+						<button type="submit" class="login">Crea Ingrediente</button>
 					</td>
 				</tr>
 			</table>

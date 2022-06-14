@@ -50,8 +50,11 @@ public class ChefService implements IServices<Chef> {
 
 	@Override
 	public boolean alreadyExists(Chef o) {
-		//We still have to see this part during the lessons.
-		return false;
+		List<Chef> chefs = this.chefRepository.findByNomeAndCognomeAndNazionalita(o.getNome(), o.getCognome(),o.getNazionalita());
+		if (chefs.size() > 0)
+			return true;
+		else 
+			return false;
 	}
 
 	public List<Chef> findFour() {

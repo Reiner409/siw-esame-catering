@@ -11,9 +11,8 @@
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div>
-		<h4 th:text="#{header.registra}">Creazione Buffet</h4>
-		<form th:action="@{/admin/createbuffet}" method="POST"
-			enctype="multipart/form-data">
+		<h4 th:text="#{header.registra}">Modifica Buffet</h4>
+		<form method="POST" enctype="multipart/form-data" th:action="@{'/admin/modificabuffet/' + ${buffet.id}}">
 			<table>
 				<tr>
 					<td>Nome</td>
@@ -30,36 +29,40 @@
 						th:errors="${buffet.descrizione}" th:style="'color:red'"></td>
 				</tr>
 				<tr>
-					<td>Seleziona lo chef:</td>
+					<td>Modifica chef:</td>
 					<td><select th:name="idchef">
 							<option value="0">Seleziona uno Chef</option>
 							<option th:each="chef : ${chefs}" th:value="${chef.id}"
-								th:text="${chef.nome} + ' '+ ${chef.cognome}"></option>
+								th:text="${chef.nome} + ' '+ ${chef.cognome}"
+								th:selected="${chef == buffet.chef}"></option>
 					</select></td>
 				</tr>
 				<tr>
-					<td>Seleziona i piatti appartenenti al tuo buffet</td>
+					<td>Modifica i piatti appartenenti al tuo buffet</td>
 					<td>
 						<ul>
-							<li th:each="piatto : ${piatti}"><input type="checkbox"
+							<li th:each="piatto : ${piatti}">
+							<input type="checkbox"
 								th:value="${piatto.id}" th:text="${piatto.nome}"
-								th:name="idpiatti" /></li>
+								th:name="idpiatti" th:checked="${buffet.getPiatti().contains(piatto)}"/></li>
 						</ul>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>Seleziona un'immagine:</p> <input type="file" accept="image/*"
+						<p>Modifica immagine:</p> <input type="file" accept="image/*"
 						class="custom-file-input" id="customFile" name="file">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<button type="submit">Crea Buffet</button>
+						<button type="submit">Modifica Buffet</button> 
+						<a th:href="@{'/admin/deletebuffet/' + ${buffet.id}}"><button type="button">Elimina Buffet</button></a> 
 					</td>
 				</tr>
 			</table>
 		</form>
+		
 	</div>
 	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>

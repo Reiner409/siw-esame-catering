@@ -9,6 +9,10 @@ public interface IServices<T> {
 	
 	public void save(T o);
 	
+	public void update(T o);
+	
+	public void delete(T o);
+	
 	public T findById(Long id);
 	
 	public List<T> findAll();

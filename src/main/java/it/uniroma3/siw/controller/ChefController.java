@@ -1,6 +1,5 @@
 package it.uniroma3.siw.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,32 +24,31 @@ public class ChefController {
 	@Autowired
 	ChefValidator chefValidator;
 
-
 	@GetMapping("/show/allchef")
-	public String getChefs(Model model)
-	{
+	public String getChefs(Model model) {
 		model.addAttribute("chefs", this.chefService.findAll());
 		return "showAllChef";
 	}
-	
+
 	@GetMapping("/show/chef/{id}")
-	public String mostraChef(@PathVariable("id") Long id, Model model)
-	{
+	public String mostraChef(@PathVariable("id") Long id, Model model) {
 		Chef chef = chefService.findById(id);
 		model.addAttribute("chef", chef);
 		return "visualizzaChef";
 	}
-	
+
 	@GetMapping("/admin/createchef")
 	public String createChef(Model model) {
 		model.addAttribute("chef", new Chef());
-
 		return "admin/createChef";
 	}
 
 	@PostMapping("/admin/createchef")
-	public String creaChef(@ModelAttribute("chef") Chef chef, BindingResult chefBindingResult,
-			@RequestParam("file") MultipartFile image, Model model) {
+	public String creaChef(@ModelAttribute("chef") Chef chef,
+			BindingResult chefBindingResult,
+			@RequestParam("file") MultipartFile image,
+			Model model) {
+
 		this.chefValidator.validate(chef, chefBindingResult);
 
 		if (!chefBindingResult.hasErrors()) {
@@ -63,9 +61,41 @@ public class ChefController {
 		}
 	}
 
-	@GetMapping("/admin/deletechef")
-	public String deleteChef(Model model) {
-		return "admin/deleteChef";
+	@GetMapping("/admin/modificachef/{id}")
+	public String createChef(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("chef", this.chefService.findById(id));
+		return "admin/modificaChef";
+	}
+
+	@PostMapping("/admin/modificachef/{id}")
+	public String confermaCreateChef(@PathVariable("id") Long id,
+			@ModelAttribute("chef") Chef chef,
+			@RequestParam("file") MultipartFile image,
+			BindingResult chefBindingResult, Model model) {
+
+		this.chefValidator.validate(chef, chefBindingResult);
+
+		if (!chefBindingResult.hasErrors()) {
+			Chef original = this.chefService.findById(id);
+			original.updateValues(chef);
+
+			chefService.save(original);
+			if (!image.isEmpty()) {
+				chef.setImmagine(Shared.SavePicture(chef.getId(), "/images/chef/", image));
+				chefService.save(chef);
+			}
+			return "admin/creationSuccess";
+		} else {
+			return "admin/modificaChef";
+		}
+	}
+
+	@GetMapping("/admin/deletechef/{id}")
+	public String deleteChef(Model model, @PathVariable ("id")Long id) 
+	{
+		Chef chef = this.chefService.findById(id);
+		this.chefService.delete(chef);
+		return "admin/creationSuccess";
 	}
 
 }

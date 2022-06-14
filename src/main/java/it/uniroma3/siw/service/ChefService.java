@@ -20,6 +20,17 @@ public class ChefService implements IServices<Chef> {
 	public void save(Chef o) {
 		chefRepository.save(o);
 	}
+	
+	@Override
+	public void update(Chef o) {
+		this.delete(o);
+		this.save(o);
+	}
+	
+	@Override
+	public void delete(Chef o) {
+		chefRepository.delete(o);
+	}
 
 	@Override
 	public Chef findById(Long id) {

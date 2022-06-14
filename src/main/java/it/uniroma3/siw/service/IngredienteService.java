@@ -19,6 +19,17 @@ public class IngredienteService implements IServices<Ingrediente> {
 	public void save(Ingrediente o) {
 		ingredienteRepository.save(o);
 	}
+	
+	@Override
+	public void update(Ingrediente o) {
+		this.delete(o);
+		this.save(o);
+	}
+	
+	@Override
+	public void delete(Ingrediente o) {
+		ingredienteRepository.delete(o);
+	}
 
 	@Override
 	public Ingrediente findById(Long id) {

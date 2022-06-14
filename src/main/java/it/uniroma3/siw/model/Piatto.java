@@ -74,6 +74,11 @@ public class Piatto {
 	public void setImmagine(String immagine) {
 		this.immagine = immagine;
 	}
+
+	public void updateValues(Piatto piatto) {
+		this.nome = piatto.getNome();
+		this.descrizione = piatto.getDescrizione();		
+	}
 	
 	
 

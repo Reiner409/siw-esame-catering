@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="/css/style.css" />
+<title>index</title>
+</head>
+
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div>
+		<h4 th:text="#{header.registra}">Modifica Chef</h4>
+		<form method="POST" enctype="multipart/form-data" th:action="@{'/admin/modificachef/' + ${chef.id}}">
+			<table>
+				<tr>
+				<td>Nome</td>
+				<td><input type="text" placeholder="Nome" required
+					th:field="${chef.nome}" /></td>
+				<td th:if="${#fields.hasErrors('chef.nome')}"
+					th:errors="${chef.nome}" th:style="'color:red'"></td>
+			</tr>
+			<tr>
+				<td>Cognome</td>
+				<td><input type="text" placeholder="Cognome" required
+					th:field="${chef.cognome}" /></td>
+				<td th:if="${#fields.hasErrors('chef.cognome')}"
+					th:errors="${chef.cognome}" th:style="'color:red'"></td>
+			</tr>
+			<tr>
+				<td>Nazionalita</td>
+				<td><input type="text" placeholder="Nazionalita" required
+					th:field="${chef.nazionalita}" /></td>
+				<td th:if="${#fields.hasErrors('chef.nazionalita')}"
+					th:errors="${chef.nazionalita}" th:style="'color:red'"></td>
+			</tr>
+
+			<tr>
+				<td>
+					<p>Modifica immagine:</p> <input type="file" accept="image/*" class="custom-file-input" id="customFile" name="file">
+				</td>
+			</tr>
+				<tr>
+					<td>
+						<button type="submit">Modifica Chef</button> 
+						<a th:href="@{'/admin/deletechef/' + ${chef.id}}"><button type="button">Elimina Chef</button></a> 
+					
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+</body>
+</html>

@@ -2,6 +2,7 @@ package it.uniroma3.siw.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,9 +26,9 @@ public class Buffet {
 	@Column(nullable = true)
 	private String immagine;
 	
-	@ManyToOne
+	@ManyToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
 	private Chef chef;
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
 	private List<Piatto> piatti;
 
 	public Buffet(String name, String description, List<Piatto> piatti) {
@@ -42,7 +43,7 @@ public class Buffet {
 	public Long getId() {
 		return id;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -86,6 +87,11 @@ public class Buffet {
 
 	public void setChef(Chef chef) {
 		this.chef = chef;
+	}
+
+	public void impostaDifferenze(Buffet buffet) {
+		this.setNome(buffet.getNome());
+		this.setDescrizione(buffet.getDescrizione());
 	}
 	
 	

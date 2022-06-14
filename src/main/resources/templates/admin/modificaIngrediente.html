@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="/css/style.css" />
+<title>index</title>
+</head>
+
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div>
+		<h4 th:text="#{header.registra}">Modifica Ingrediente</h4>
+		<form method="POST" enctype="multipart/form-data"
+			th:action="@{'/admin/modificaingrediente/' + ${ingrediente.id}}">
+			<table>
+				<tr>
+					<td>Nome</td>
+					<td><input type="text" placeholder="Nome dell'ingrediente"
+						required th:field="${ingrediente.nome}" /></td>
+					<td th:if="${#fields.hasErrors('ingrediente.nome')}"
+						th:errors="${ingrediente.nome}" th:style="'color:red'"></td>
+				</tr>
+				<tr>
+					<td>Origine</td>
+					<td><input type="text" placeholder="Origine dell'ingrediente"
+						required th:field="${ingrediente.origine}" /></td>
+					<td th:if="${#fields.hasErrors('ingrediente.origine')}"
+						th:errors="${ingrediente.origine}" th:style="'color:red'"></td>
+				</tr>
+				<tr>
+					<td>Descrizione</td>
+					<td><input type="text"
+						placeholder="Descrizione dell'ingrediente" required
+						th:field="${ingrediente.descrizione}" /></td>
+					<td th:if="${#fields.hasErrors('ingrediente.descrizione')}"
+						th:errors="${ingrediente.descrizione}" th:style="'color:red'"></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Modifica immagine:</p> <input type="file" accept="image/*"
+						class="custom-file-input" id="customFile" name="file">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button type="submit">Modifica Ingrediente</button> 
+						<a th:href="@{'/admin/deleteingrediente/' + ${ingrediente.id}}"><button type="button">Elimina Ingrediente</button></a> 
+					
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+</body>
+</html>

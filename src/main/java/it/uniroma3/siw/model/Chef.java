@@ -28,7 +28,7 @@ public class Chef {
 	@Column(nullable = true)
 	private String immagine;
 	
-	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE} )
+	@OneToMany(cascade = {CascadeType.ALL} )
 	private List<Buffet> buffet;
 
 	public Chef(String nome, String cognome, String nazionalita, String immagine, List<Buffet> buffet) {
@@ -90,6 +90,16 @@ public class Chef {
 	public String getNominativo()
 	{
 		return this.nome + " " + this.cognome;
+	}
+
+	public void removeBuffet(Buffet buffet) {
+		this.buffet.remove(buffet);
+	}
+
+	public void updateValues(Chef chef) {
+		this.nome = chef.getNome();
+		this.cognome = chef.getCognome();
+		this.nazionalita = chef.getNazionalita();
 	}
 		
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.model.Ingrediente;
 import it.uniroma3.siw.model.Piatto;
 import it.uniroma3.siw.repository.PiattoRepository;
 
@@ -18,7 +19,18 @@ public class PiattoService implements IServices<Piatto> {
 	@Override
 	public void save(Piatto o) {
 		piattoRepository.save(o);
-		
+	}
+	
+	@Override
+	public void update(Piatto o) {
+		this.delete(o);
+		this.save(o);
+	}
+	
+	
+	@Override
+	public void delete(Piatto o) {
+		piattoRepository.delete(o);
 	}
 
 	@Override
@@ -42,6 +54,15 @@ public class PiattoService implements IServices<Piatto> {
 	public boolean alreadyExists(Piatto o) {
 		//We still have to see this part during the lessons.
 		return false;
+	}
+
+	public List<Piatto> findByIngrediente(Ingrediente ingrediente) {
+		
+		List<Piatto> piatti = new LinkedList<>();
+		for (Piatto p : piattoRepository.findByIngredienti(ingrediente)) {
+				piatti.add(p);
+		}
+		return piatti;
 	}
 
 }

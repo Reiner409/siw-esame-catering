@@ -19,6 +19,18 @@ public class UserService implements IServices<User>{
 	public void save(User o) {
 		userRepository.save(o);
 	}
+	
+	@Override
+	public void update(User o) {
+		this.delete(o);
+		this.save(o);
+	}
+
+
+	@Override
+	public void delete(User o) {
+		userRepository.delete(o);
+	}
 
 	@Override
 	public User findById(Long id) {

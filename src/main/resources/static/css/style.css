@@ -329,7 +329,7 @@ button:hover {
 	align-items: flex-start;
 	justify-content: flex-start;
 	overflow:hidden;
-	flex: 1 0 20%;
+	flex: 1 0 25%;
 }
 
 .container {

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Buffet;
+import it.uniroma3.siw.model.Piatto;
 import it.uniroma3.siw.repository.BuffetRepository;
 
 @Service
@@ -19,6 +20,13 @@ public class BuffetService implements IServices<Buffet>{
 	public void save(Buffet o) {
 		buffetRepository.save(o);
 	}
+	
+	@Override
+	public void update(Buffet o) {
+		this.delete(o);
+		this.save(o);
+	}
+
 
 	@Override
 	public Buffet findById(Long id) {
@@ -39,6 +47,30 @@ public class BuffetService implements IServices<Buffet>{
 	public boolean alreadyExists(Buffet o) {
 		//We still have to see this part during the lessons.
 		return false;
+	}
+
+	@Override
+	public void delete(Buffet o) {
+		buffetRepository.delete(o);
+	}
+
+	public List<Buffet> findAllWithChef() {
+		List<Buffet> buffets = new LinkedList<Buffet>();
+		for(Buffet b : buffetRepository.findAll())
+		{
+			if(b.getChef() != null)
+				buffets.add(b);
+		}
+		return buffets;
+	}
+
+	public List<Buffet> findByPiatto(Piatto piatto) {
+		List<Buffet> buffets = new LinkedList<Buffet>();
+		
+		for(Buffet b : this.buffetRepository.findByPiatti(piatto))
+			buffets.add(b);
+		
+		return buffets;
 	}
 
 }

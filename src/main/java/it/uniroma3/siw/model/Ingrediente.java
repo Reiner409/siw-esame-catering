@@ -77,6 +77,12 @@ public class Ingrediente {
 	public void setImmagine(String immagine) {
 		this.immagine = immagine;
 	}
+
+	public void updateValues(Ingrediente ingrediente) {
+		this.nome = ingrediente.getNome();
+		this.descrizione = ingrediente.getDescrizione();
+		this.origine = ingrediente.getOrigine();
+	}
 	
 	
 	

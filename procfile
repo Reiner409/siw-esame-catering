@@ -1,1 +1,1 @@
-web: sh target/bin/siw_esame
+web: java -cp target/classes;target/dependency/* it.uniroma3.siw.Catering

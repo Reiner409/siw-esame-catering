@@ -62,7 +62,9 @@ public class IngredientController {
 
 	@GetMapping("/admin/modificaingrediente/{id}")
 	public String modificaIngredient(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("ingrediente", this.ingredienteService.findById(id));
+		Ingrediente ingrediente = this.ingredienteService.findById(id);
+		model.addAttribute("ingrediente", ingrediente);
+		model.addAttribute("immagine", ingrediente.getImmagine());
 		return "admin/modificaIngrediente";
 	}
 
@@ -86,9 +88,9 @@ public class IngredientController {
 				ingredienteService.save(original);
 			}
 
-			model.addAttribute("ingrediente", this.ingredienteService.findById(id));
 			return "redirect:/show/ingrediente/"+id;
 		} else {
+			model.addAttribute("ingrediente", this.ingredienteService.findById(id));
 			return "admin/modificaIngrediente";
 		}
 	}
@@ -110,7 +112,7 @@ public class IngredientController {
 		}
 		
 		this.ingredienteService.delete(ingrediente);
-		return "admin/creationSuccess";
+		return "redirect:/index";
 	}
 
 }

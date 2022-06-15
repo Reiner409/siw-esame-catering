@@ -14,6 +14,11 @@ a {
     color: #6bc8ff;
 }
 
+.error{
+    color: #ff211e;
+    font-size: 1.5em;
+}
+
 .flex-container {
     align-items: stretch;
     height: 100%;
@@ -180,7 +185,8 @@ a {
     flex: 1 0 45%;
 }
 
-img.show {
+
+img.modifierFlex {
     min-height: 500px;
     max-width: 100%;
     max-height: 800px;
@@ -189,6 +195,12 @@ img.show {
 img.showAll {
     max-width: 100%;
     max-height: 100%;
+}
+
+img.show {
+    min-height: 500px;
+    max-width: 100%;
+    max-height: 800px;
 }
 
 img.chef_picture {
@@ -273,7 +285,6 @@ button:hover {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 100%;
     overflow: hidden;
     background-color: black;
 }
@@ -290,7 +301,7 @@ button:hover {
     align-items: flex-start;
     justify-content: flex-start;
     overflow: hidden;
-    flex: 1 0 25%;
+    flex: 1 1 35%;
     margin: 2%;
 
 }
@@ -403,8 +414,9 @@ img.modifierFlex {
     margin: 10%;
 }
 
-.modifiedImage {
+img.modifiedImage {
+    min-height: 500px;
     max-width: 50%;
-    max-height: 50%;
-    margin: 2%;
+    max-height: 800px;
 }
+

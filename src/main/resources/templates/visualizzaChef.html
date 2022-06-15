@@ -12,28 +12,30 @@
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
 <h3>Dettagli chef</h3>
-<div class="showContainer">
-    <div class="show">
-        <img th:src="${chef.immagine}" class="show"
-             alt="Chef picture"/>
-        <div sec:authorize-url="/admin" class="adminButton">
-            <h1>
-                <a th:href="@{'/admin/modificachef/' + ${chef.getId()}}">
-                    <button class="adminCommandButton">Modifica Chef</button>
-                </a>
-            </h1>
+<div>
+    <div class="showContainer">
+        <div class="show">
+            <img th:src="${chef.immagine}" class="show"
+                 alt="Chef picture"/>
+            <div sec:authorize-url="/admin" class="adminButton">
+                <h1>
+                    <a th:href="@{'/admin/modificachef/' + ${chef.getId()}}">
+                        <button class="adminCommandButton">Modifica Chef</button>
+                    </a>
+                </h1>
+            </div>
         </div>
-    </div>
-    <div class="show">
-        <div class="chefBuffetText">
-            <h1 th:text="${chef.getNominativo()}">Nome e Cognome</h1>
-            <h1 th:text="${chef.nazionalita}">Nazionalita</h1>
-            <h2>
-                <div th:each="buffet : ${chef.buffet}">
-                    <a th:href="@{'/show/buffet' + '/' + ${buffet.id}}"
-                       th:text="${buffet.nome}"> Buffet </a>
-                </div>
-            </h2>
+        <div class="show">
+            <div class="chefBuffetText">
+                <h1 th:text="${chef.getNominativo()}">Nome e Cognome</h1>
+                <h1 th:text="${chef.nazionalita}">Nazionalita</h1>
+                <h2>
+                    <div th:each="buffet : ${chef.buffet}">
+                        <a th:href="@{'/show/buffet' + '/' + ${buffet.id}}"
+                           th:text="${buffet.nome}"> Buffet </a>
+                    </div>
+                </h2>
+            </div>
         </div>
     </div>
 </div>

@@ -26,16 +26,19 @@ public class AuthenticationController {
 	@Autowired
 	private UserValidator userValidator;
 
+	//Metodo login. Il PostMapping e' gestito dalla libreria di Spring
 	@GetMapping("/login") 
 	public String showLoginForm (Model model) {
 		return "loginForm";
 	}
-		
+
+	//Metodo logout. Il PostMapping e' gestito dalla libreria di Spring
 	@GetMapping("/logout") 
 	public String logout(Model model) {
 		return "/logout";
 	}	
-	
+
+	//Metodo default al quale si viene reindirizzati dopo un login/logout avvenuto con successo.
     @GetMapping("/default")
     public String defaultAfterLogin(Model model) {
         

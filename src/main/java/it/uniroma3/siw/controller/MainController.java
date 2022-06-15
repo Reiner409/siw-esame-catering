@@ -1,17 +1,15 @@
 package it.uniroma3.siw.controller;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.model.Buffet;
+import it.uniroma3.siw.model.Chef;
+import it.uniroma3.siw.service.ChefService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import it.uniroma3.siw.model.Buffet;
-import it.uniroma3.siw.model.Chef;
-import it.uniroma3.siw.service.ChefService;
+import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -31,6 +29,7 @@ public class MainController {
 		
 		model.addAttribute("buffets", buffets);
 		model.addAttribute("chefs", chefs);
+
 		return "index";
 	}
 	

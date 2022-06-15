@@ -86,6 +86,7 @@ public class ChefController {
 			}
 			return "redirect:/show/chef/"+id;
 		} else {
+			model.addAttribute("chef", this.chefService.findById(id));
 			return "admin/modificaChef";
 		}
 	}
@@ -95,7 +96,6 @@ public class ChefController {
 	{
 		Chef chef = this.chefService.findById(id);
 		this.chefService.delete(chef);
-		return "admin/creationSuccess";
+		return "redirect:/index";
 	}
-
 }

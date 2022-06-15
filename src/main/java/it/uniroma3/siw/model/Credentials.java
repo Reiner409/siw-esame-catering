@@ -26,6 +26,7 @@ public class Credentials {
 	private String role;
 	
 	@OneToOne(cascade = CascadeType.ALL)
+	@Column(nullable = false)
 	private User user;
 
 	

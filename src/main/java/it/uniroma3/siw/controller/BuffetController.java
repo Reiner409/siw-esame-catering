@@ -25,169 +25,177 @@ import it.uniroma3.siw.service.PiattoService;
 
 @Controller
 public class BuffetController {
-	@Autowired
-	BuffetService buffetService;
-	
-	@Autowired
-	BuffetValidator buffetValidator;
-	
-	@Autowired
-	PiattoService piattoService;
-	
-	@Autowired
-	ChefService chefService;
-	
-	private static final String pictureFolder = "/images/buffet/";
-	
-	
-	@GetMapping("/show/allbuffet")
-	public String getBuffets(Model model)
-	{
-		model.addAttribute("buffets", this.buffetService.findAllWithChef());
-		return "showAllBuffet";
-	}
-	
-	
-	@GetMapping("/show/buffet/{id}")
-	public String mostraBuffet(@PathVariable("id") Long id, Model model)
-	{
-		Buffet buffet = buffetService.findById(id);
-		model.addAttribute("buffet", buffet);
-		return "visualizzaBuffet";
-	}
-	
-	@GetMapping("/admin/modificabuffet/{id}")
-	public String modificaBuffet(@PathVariable("id") Long id, Model model)
-	{
-		Buffet buffet = buffetService.findById(id);
-		model.addAttribute("buffet", buffet);
-		model.addAttribute("chef", buffet.getChef());
-		model.addAttribute("piatti",this.piattoService.findAll());
-		model.addAttribute("piattiSelected",buffet.getPiatti());
-		model.addAttribute("chefs",this.chefService.findAll());
-		return "admin/modificaBuffet";
-	}
-	
-	@PostMapping("/admin/modificabuffet/{id}")
-	public String confermaModificaBuffet(@ModelAttribute("buffet") Buffet updated,
-			BindingResult buffetBindingResult,
-			@PathVariable("id") Long idBuffet,
-			@RequestParam("idpiatti") List<Long> idPiatti,
-			@RequestParam("idchef") Long idChef,
-			@RequestParam("file") MultipartFile image,
-			Model model)
-	{
-		this.buffetValidator.validateUpdate(updated, buffetBindingResult);
-		
-		if(!buffetBindingResult.hasErrors())
-		{
-			Buffet buffet = this.buffetService.findById(idBuffet);
-			buffet.impostaDifferenze(updated);
-			
-			List<Piatto> ingredienti = new ArrayList<>();
-			for (Long idIngr : idPiatti) {
-				ingredienti.add(this.piattoService.findById(idIngr));
-			}
-			
-			buffet.setPiatti(ingredienti);
-			
-			if (buffet.getChef()==null || buffet.getChef().getId() != idChef) {
-				
-				if (buffet.getChef() != null) 
-				{
-					Chef oldChef = buffet.getChef();
-					oldChef.removeBuffet(buffet);
-					this.chefService.save(oldChef);
-				}
+    @Autowired
+    BuffetService buffetService;
 
-				Chef chef = this.chefService.findById(idChef);
-				buffet.setChef(chef);
-				chef.getBuffet().add(buffet);
-				this.chefService.save(chef);
-			}
-			
-			buffetService.save(buffet);
-			if (!image.isEmpty()) {
-				buffet.setImmagine(Shared.SavePicture(buffet.getId(), pictureFolder, image));
-				buffetService.save(buffet);
-			}
-			return "redirect:/show/buffet/"+idBuffet;
-		}
-		else
-		{
-			return "admin/modificabuffet";
-		}
-	}
-	
-	@GetMapping("/admin/createbuffet")
-	public String createBuffet(Model model)
-	{
-		model.addAttribute("buffet", new Buffet());
-		model.addAttribute("piatti", piattoService.findAll());
-		model.addAttribute("piattiSelected", new LinkedList<Piatto>());
-		model.addAttribute("chefs",this.chefService.findAll());
-		model.addAttribute("chef",null);
+    @Autowired
+    BuffetValidator buffetValidator;
 
-		return "admin/createBuffet";
-	}
-	
-	@PostMapping("/admin/createbuffet")
-	public String creaBuffet(@ModelAttribute("buffet") Buffet buffet,
-			BindingResult buffetBindingResult,
-			@RequestParam("idpiatti") List<Long> idPiatti,
-			@RequestParam("idchef") Long idChef,
-			@RequestParam("file") MultipartFile image,
-			Model model)
-	{
-		this.buffetValidator.validate(buffet, buffetBindingResult);
+    @Autowired
+    PiattoService piattoService;
 
-		List<Piatto> piatti = new ArrayList<>();
-		for (Long idPiatto : idPiatti) {
-			piatti.add(this.piattoService.findById(idPiatto));
-		}
+    @Autowired
+    ChefService chefService;
 
-		if(!buffetBindingResult.hasErrors())
-		{
+    private static final String pictureFolder = "/images/buffet/";
 
-			buffet.setPiatti(piatti);
-			
-			Chef chef = this.chefService.findById(idChef);
-			buffet.setChef(chef);
-			buffetService.save(buffet);
-			
-			chef.getBuffet().add(buffet);
-			this.chefService.save(chef);
-			
 
-			buffet.setImmagine(Shared.SavePicture(buffet.getId(), pictureFolder, image));
-			buffetService.save(buffet);
-			return "redirect:/show/buffet/"+buffet.getId();
-		}
-		else
-		{
-			model.addAttribute("chef", this.chefService.findById(idChef));
-			model.addAttribute("piatti",this.piattoService.findAll());
-			model.addAttribute("piattiSelected",piatti);
-			model.addAttribute("chefs",this.chefService.findAll());
-			return "admin/createBuffet";
-		}
-	}
-	
-	@GetMapping("/admin/deletebuffet/{id}")
-	public String deleteBuffet(Model model, @PathVariable("id") Long id)
-	{
-		Buffet buffet = this.buffetService.findById(id);
-		Chef chef = buffet.getChef();
+    @GetMapping("/show/allbuffet")
+    public String getBuffets(Model model) {
+        model.addAttribute("buffets", this.buffetService.findAllWithChef());
+        return "showAllBuffet";
+    }
 
-		if (chef != null) {
-			chef.removeBuffet(buffet);
-			buffet.setChef(null);
-			this.chefService.save(chef);
-		}
 
-		this.buffetService.delete(buffet);
-		
-		return "admin/creationSuccess";
-	}
+    @GetMapping("/show/buffet/{id}")
+    public String mostraBuffet(@PathVariable("id") Long id, Model model) {
+        Buffet buffet = buffetService.findById(id);
+        model.addAttribute("buffet", buffet);
+        return "visualizzaBuffet";
+    }
+
+    @GetMapping("/admin/modificabuffet/{id}")
+    public String modificaBuffet(@PathVariable("id") Long id, Model model) {
+        Buffet buffet = buffetService.findById(id);
+        model.addAttribute("buffet", buffet);
+        model.addAttribute("chef", buffet.getChef());
+        model.addAttribute("piatti", this.piattoService.findAll());
+        model.addAttribute("piattiSelected", buffet.getPiatti());
+        model.addAttribute("chefs", this.chefService.findAll());
+        return "admin/modificaBuffet";
+    }
+
+    @PostMapping("/admin/modificabuffet/{id}")
+    public String confermaModificaBuffet(@ModelAttribute("buffet") Buffet updated,
+                                         BindingResult buffetBindingResult,
+                                         @PathVariable("id") Long idBuffet,
+                                         @RequestParam(value = "idpiatti", required = false) List<Long> idPiatti,
+                                         @RequestParam(value = "idchef", required = false) Long idChef,
+                                         @RequestParam("file") MultipartFile image,
+                                         Model model) {
+        this.buffetValidator.validateUpdate(updated, buffetBindingResult);
+
+        if (idChef == 0)
+            buffetBindingResult.reject("buffet.noChef");
+
+        List<Piatto> piatti = new ArrayList<>();
+        if (idPiatti != null) {
+            for (Long idPiatto : idPiatti) {
+                piatti.add(this.piattoService.findById(idPiatto));
+            }
+        }
+
+        if (!buffetBindingResult.hasErrors()) {
+            Buffet buffet = this.buffetService.findById(idBuffet);
+            buffet.impostaDifferenze(updated);
+
+
+            buffet.setPiatti(piatti);
+
+            if (buffet.getChef() == null || buffet.getChef().getId() != idChef) {
+
+                if (buffet.getChef() != null) {
+                    Chef oldChef = buffet.getChef();
+                    oldChef.removeBuffet(buffet);
+                    this.chefService.save(oldChef);
+                }
+
+                Chef chef = this.chefService.findById(idChef);
+                buffet.setChef(chef);
+                chef.getBuffet().add(buffet);
+                this.chefService.save(chef);
+            }
+
+            buffetService.save(buffet);
+            if (!image.isEmpty()) {
+                buffet.setImmagine(Shared.SavePicture(buffet.getId(), pictureFolder, image));
+                buffetService.save(buffet);
+            }
+            return "redirect:/show/buffet/" + idBuffet;
+        } else {
+
+
+            model.addAttribute("piatti", this.piattoService.findAll());
+            model.addAttribute("piattiSelected", piatti);
+            model.addAttribute("chefs", this.chefService.findAll());
+            Buffet buffet = this.buffetService.findById(idBuffet);
+            if (!(idChef != 0 && idChef != buffet.getChef().getId()))
+                idChef = buffet.getChef().getId();
+            model.addAttribute("chef", this.chefService.findById(idChef));
+            model.addAttribute("buffet", buffet);
+            return "admin/modificabuffet";
+        }
+    }
+
+    @GetMapping("/admin/createbuffet")
+    public String createBuffet(Model model) {
+        model.addAttribute("buffet", new Buffet());
+        model.addAttribute("piatti", piattoService.findAll());
+        model.addAttribute("piattiSelected", new LinkedList<Piatto>());
+        model.addAttribute("chefs", this.chefService.findAll());
+        model.addAttribute("chef", null);
+
+        return "admin/createBuffet";
+    }
+
+    @PostMapping("/admin/createbuffet")
+    public String creaBuffet(@ModelAttribute("buffet") Buffet buffet,
+                             BindingResult buffetBindingResult,
+                             @RequestParam(value = "idpiatti", required = false) List<Long> idPiatti,
+                             @RequestParam(value = "idchef", required = false) Long idChef,
+                             @RequestParam("file") MultipartFile image,
+                             Model model) {
+        this.buffetValidator.validate(buffet, buffetBindingResult);
+
+        List<Piatto> piatti = new ArrayList<>();
+        if (idPiatti != null) {
+            for (Long idPiatto : idPiatti) {
+                piatti.add(this.piattoService.findById(idPiatto));
+            }
+        }
+
+        if (idChef == 0)
+            buffetBindingResult.reject("buffet.noChef");
+
+        if (!buffetBindingResult.hasErrors()) {
+
+            buffet.setPiatti(piatti);
+
+            Chef chef = this.chefService.findById(idChef);
+            buffet.setChef(chef);
+            buffetService.save(buffet);
+
+            chef.getBuffet().add(buffet);
+            this.chefService.save(chef);
+
+
+            buffet.setImmagine(Shared.SavePicture(buffet.getId(), pictureFolder, image));
+            buffetService.save(buffet);
+            return "redirect:/show/buffet/" + buffet.getId();
+        } else {
+            if (idChef != 0)
+                model.addAttribute("chef", this.chefService.findById(idChef));
+            model.addAttribute("piatti", this.piattoService.findAll());
+            model.addAttribute("piattiSelected", piatti);
+            model.addAttribute("chefs", this.chefService.findAll());
+            return "admin/createBuffet";
+        }
+    }
+
+    @GetMapping("/admin/deletebuffet/{id}")
+    public String deleteBuffet(Model model, @PathVariable("id") Long id) {
+        Buffet buffet = this.buffetService.findById(id);
+        Chef chef = buffet.getChef();
+
+        if (chef != null) {
+            chef.removeBuffet(buffet);
+            buffet.setChef(null);
+            this.chefService.save(chef);
+        }
+
+        this.buffetService.delete(buffet);
+
+        return "redirect:/index";
+    }
 
 }

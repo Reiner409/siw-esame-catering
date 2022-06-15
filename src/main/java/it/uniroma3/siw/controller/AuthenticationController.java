@@ -42,9 +42,9 @@ public class AuthenticationController {
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "index";
+            return "redirect:/index";
         }
-        return "index";
+        return "redirect:/index";
     }
 
 	@GetMapping("/registerForm")
@@ -74,7 +74,7 @@ public class AuthenticationController {
 		}
 		else
 		{
-			return "registerUser";
+			return "registerUserForm";
 		}
 	}
 	

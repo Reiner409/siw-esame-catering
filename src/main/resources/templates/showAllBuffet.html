@@ -13,11 +13,13 @@
 	<div class="showAllContainer">
 		<div th:each="buffet : ${buffets}" class="showAll">
 			<a th:href="'/show/buffet/' + ${buffet.id}">
-				<button>
-					<img th:src="${buffet.immagine}" />
-					<p th:text="${buffet.nome}" />
-					<p th:text="${buffet.descrizione}" />
-					<p th:text="${buffet.getChef().getNominativo()}" />
+				<button class="showAllButton">
+					<img th:src="${buffet.immagine}"/>
+					<h2>
+						<p th:text="${buffet.nome}"/>
+						<p th:text="${buffet.descrizione}"/>
+						<p th:text="${buffet.getChef().getNominativo()}"/>
+					</h2>
 				</button>
 			</a>
 		</div>

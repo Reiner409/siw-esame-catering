@@ -3,80 +3,85 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="/css/style.css" />
-<title>index</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>index</title>
 </head>
 
 <body>
-	<header th:replace="fragments/base.html :: intestazione"></header>
-	<div>
-		<h4 th:text="#{header.registra}">Modifica Buffet</h4>
-		<form method="POST" enctype="multipart/form-data" th:action="@{'/admin/modificabuffet/' + ${buffet.id}}" th:object="${buffet}">
-			<table>
-				<tr>
-					<td>Nome</td>
-					<td><input type="text" placeholder="Nome del Buffet" required
-						th:field="*{nome}" /></td>
-					<td th:if="${#fields.hasErrors('nome')}"
-						th:errors="*{nome}" th:style="'color:red'"></td>
-				</tr>
-				<tr>
-					<td>Descrizione</td>
-					<td><input type="text" placeholder="Descrizione del Buffet"
-						required th:field="*{descrizione}" /></td>
-					<td th:if="${#fields.hasErrors('descrizione')}"
-						th:errors="*{descrizione}" th:style="'color:red'"></td>
-				</tr>
-				<tr>
-					<td>Modifica chef:</td>
-					<td><select th:name="idchef">
-							<option value="0">Seleziona uno Chef</option>
-							<option th:each="che : ${chefs}" th:value="${che.id}"
-								th:text="${che.nome} + ' '+ ${che.cognome}"
-								th:selected="${che.equals(chef)}"></option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Modifica i piatti appartenenti al tuo buffet</td>
-					<td>
-						<ul>
-							<li th:each="piatto : ${piatti}">
-							<input type="checkbox"
-								th:value="${piatto.id}" th:text="${piatto.nome}"
-								th:name="idpiatti" th:checked="${piattiSelected.contains(piatto)}"/></li>
-						</ul>
-					</td>
-				</tr>
-				<tr>
-					<div th:if="${#fields.hasErrors('global')}">
-						<h3>Global errors:</h3>
-						<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
-					</div>
-				</tr>
-				<tr>
-					<td>
-						<p>Modifica immagine:</p> <input type="file" accept="image/*"
-						class="custom-file-input" id="customFile" name="file">
-					</td>
-				</tr>
-				<tr>
-					<div th:if="${#fields.hasErrors('global')}">
-						<h3>Global errors:</h3>
-						<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
-					</div>
-				</tr>
-				<tr>
-					<td>
-						<button type="submit" class="login">Modifica Buffet</button> 
-						<a th:href="@{'/admin/deletebuffet/' + ${buffet.id}}" >
-						<button type="button" class="login">Elimina Buffet</button></a> 
-					</td>
-				</tr>
-			</table>
-		</form>
-		
-	</div>
-	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<div>
+    <h3  th:text="#{header.registra}">Modifica Buffet</h3>
+    <form method="POST" enctype="multipart/form-data" th:action="@{'/admin/modificabuffet/' + ${buffet.id}}"
+          th:object="${buffet}">
+        <div class="modifierFlex">
+			<img th:src="${buffet.immagine}" alt="Buffet picture" class="modifiedImage"/>
+            <table>
+                <tr>
+                    <td>Nome</td>
+                    <td><input type="text" placeholder="Nome del Buffet" required
+                               th:field="*{nome}"/></td>
+                    <td th:if="${#fields.hasErrors('nome')}"
+                        th:errors="*{nome}" th:style="'color:red'"></td>
+                </tr>
+                <tr>
+                    <td>Descrizione</td>
+                    <td><input type="text" placeholder="Descrizione del Buffet"
+                               required th:field="*{descrizione}"/></td>
+                    <td th:if="${#fields.hasErrors('descrizione')}"
+                        th:errors="*{descrizione}" th:style="'color:red'"></td>
+                </tr>
+                <tr>
+                    <td>Modifica chef:</td>
+                    <td><select th:name="idchef">
+                        <option value="0">Seleziona uno Chef</option>
+                        <option th:each="che : ${chefs}" th:value="${che.id}"
+                                th:text="${che.nome} + ' '+ ${che.cognome}"
+                                th:selected="${che.equals(chef)}"></option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>Modifica i piatti appartenenti al tuo buffet</td>
+                    <td>
+                        <ul>
+                            <li th:each="piatto : ${piatti}">
+                                <input type="checkbox"
+                                       th:value="${piatto.id}" th:text="${piatto.nome}"
+                                       th:name="idpiatti" th:checked="${piattiSelected.contains(piatto)}"/></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <div th:if="${#fields.hasErrors('global')}">
+                        <h3>Global errors:</h3>
+                        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
+                    </div>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Modifica immagine:</p> <input type="file" accept="image/*"
+                                                         class="custom-file-input" id="customFile" name="file">
+                    </td>
+                </tr>
+                <tr>
+                    <div th:if="${#fields.hasErrors('global')}">
+                        <h3>Global errors:</h3>
+                        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
+                    </div>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" class="loginErase">Modifica Buffet</button>
+                        <a th:href="@{'/admin/deletebuffet/' + ${buffet.id}}">
+                            <button type="button" class="login">Elimina Buffet</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
+</div>
+<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

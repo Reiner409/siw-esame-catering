@@ -1,356 +1,410 @@
 html, body {
-	height: 100%;
-	background-color: black;
-	color: white;
+    height: 100%;
+    background-color: black;
+    color: white;
 }
 
 h1 {
-	font: 2.0em comic-sans;
-	font-weight: bold;
-	box-sizing: border-box;
+    font: 2.0em comic-sans;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+a {
+    color: #6bc8ff;
 }
 
 .flex-container {
-	display: flexbox;
-	align-items: stretch;
-	height: 100%;
-	min-height: 500px;
+    align-items: stretch;
+    height: 100%;
+    min-height: 500px;
+}
+
+.loginContainer {
+    margin: 1%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.loginButton {
+    justify-content: center;
+    align-content: center;
+    justify-self: flex-end;
+    align-self: center;
+}
+
+.adminButton {
+    align-self: flex-start;
+    justify-self: flex-start;
 }
 
 .titleContainer {
-	position: relative;
-	display: flex;
-	align-items: stretch;
-	overflow: hidden;
-	height: 65%;
-	padding: 20px;
-	border: 5px solid black;
-	/* background-color: red; */
-	border-radius: 250px;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    height: 65%;
+    padding: 20px;
+    border: 5px solid black;
+    /* background-color: red; */
+    border-radius: 250px;
 }
 
-.separator{
-		position: relative;
-	display: flex;
-	align-items: stretch;
-	overflow: hidden;
-	height: 45%;
-	padding: 20px;
-	border: 5px solid black;
-	/* background-color: red; */
-	border-radius: 250px;
+.separator {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    height: 45%;
+    padding: 20px;
+    border: 5px solid black;
+    /* background-color: red; */
+    border-radius: 250px;
 }
 
 .bg-image {
-	margin-top: -4%;
-	margin-left: -0.5%;
-	margin-right: -0.5%;
-	/* Add the blur effect */
-	filter: blur(8px);
-	-webkit-filter: blur(8px);
-	/* Full height */
-	height: 150%;
-	width: 10 px;
-	min-height: 500px;
-	/* Center and scale the image nicely */
-	background-position: center;
-	background-repeat: no-repeat;
-	/* background-size: cover; */
-	flex: 1;
+    margin-top: -4%;
+    margin-left: -0.5%;
+    margin-right: -0.5%;
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    /* Full height */
+    height: 150%;
+    width: 10px;
+    min-height: 500px;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    flex: 1;
 }
 
 .bg-text {
-	font-size: 3.5em;
-	/* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4);
-	/* Black w/opacity/see-through */
-	color: white;
-	font-weight: bold;
-	border: 3px solid #f1f1f1;
-	border-radius: 1.0em;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 27%;
-	padding: 20px;
-	text-align: center;
-	flex: 1;
+    font-size: 3.5em;
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    border-radius: 1.0em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 27%;
+    padding: 20px;
+    text-align: center;
+    flex: 1;
 }
 
 .informations {
-	font-size: 2.9em;
-	text-align: center;
-	flex: 0.5em;
-	align-self: center;
-	border: 3px solid;
-	background-color: rgb(255, 255, 255, 0.2);
-	margin: 2%;
-	padding-bottom: 0.5%;
-	border-radius: 2.0em;
-	overflow: auto;
+    font-size: 2.9em;
+    text-align: center;
+    flex: 0.5em;
+    align-self: center;
+    border: 3px solid;
+    background-color: rgb(255, 255, 255, 0.2);
+    margin: 2%;
+    padding-bottom: 0.5%;
+    border-radius: 2.0em;
+    overflow: auto;
 }
 
 .informationsImage {
-	border-radius: 10%;
-	flex: 6em;
-	overflow: hidden;
+    border-radius: 10%;
+    flex: 6em;
+    overflow: hidden;
 }
 
 .informationsBoxLeft {
-	display: flex;
-	flex-direction: row;
-	margin: 2%;
-	margin-top: 5%;
-	margin-bottom: 5%;
-	justify-content: space-between;
-	margin-bottom: 5%;
-	animation-name: slideinLeft;
-	animation-duration: 2.5s;
+    display: flex;
+    flex-direction: row;
+    margin: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    justify-content: space-between;
+    margin-bottom: 5%;
+    animation-name: slideinLeft;
+    animation-duration: 2.5s;
 }
 
 .informationsBoxRight {
-	display: flex;
-	flex-direction: row;
-	margin: 2%;
-	margin-top: 5%;
-	margin-bottom: 5%;
-	justify-content: space-between;
-	animation-name: slideinRight;
-	animation-duration: 2.5s;
+    display: flex;
+    flex-direction: row;
+    margin: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    justify-content: space-between;
+    animation-name: slideinRight;
+    animation-duration: 2.5s;
 }
 
-@keyframes slideinLeft
-{
-	from 
-	{ 
-	margin-left:100%;
-	opacity: 0%;
-	}
-	to {
-	margin-left: 2%;
-	opacity: 100%;
-	}
+@keyframes slideinLeft {
+    from {
+        margin-left: 100%;
+        opacity: 0%;
+    }
+    to {
+        margin-left: 2%;
+        opacity: 100%;
+    }
 }
 
-@keyframes slideinRight
-{
+@keyframes slideinRight {
 
-	from 
-	{ 
-	margin-right:100%;
-	opacity: 0%;
-	}
-	to {
-	margin-right: 2%;
-	opacity: 100%;
-	}
-}
-
-@keyframes animazione_scorrimento {
-    0%
-    {
-        margin-right: -50%;
-        opacity: 0;
-        background-image: url("1.png");
+    from {
+        margin-right: 100%;
+        opacity: 0%;
     }
-    12%
-    {
-        background-image: url("1.png");
-        margin-right: 0%;
-        opacity: 1;
-    }
-
-    20%
-    {
-        background-image: url("1.png");
-        margin-right: 0%;
-        opacity: 1;
-    }
-    29%
-    {   
-        background-image: url("1.png");
-        margin-right: 50%;
-        opacity: 0;
-    }
-    30%
-    {   
-        margin-right: -50%;
-        opacity: 0;
-        background-image: url("2.png");
-    }
-    40%
-    {   margin-right: 0%;
-        opacity: 1;
-        background-image: url("2.png");
-    }
-    53%
-    {
-        margin-right: 0%;
-        background-image: url("2.png");
-        opacity:1;
-    }
-    65%
-    {
-        background-image: url("2.png");
-        margin-right: 50%;
-        opacity: 0;
-    }
-    66%
-    {
-        
-        margin-right: -50%;
-        opacity: 0;
-        background-image: url("3.png");
-    }
-    78%
-    {
-        opacity:1;
-        margin-right:0%;
-    }
-    85%
-    {
-        opacity:1;
-        margin-right:0%;
-    }
-    100%
-    {
-        background-image: url("3.png");
-        margin-right: 50%;
-        opacity:0;
+    to {
+        margin-right: 2%;
+        opacity: 100%;
     }
 }
 
 .chefs_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
-.singleton_chef_container{
-	padding: 30px;
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
-	flex: 1 0 45%;
+
+.singleton_chef_container {
+    padding: 30px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex: 1 0 45%;
 }
 
 img.show {
-  max-width: 100%;
-  max-height:100%;
+    min-height: 500px;
+    max-width: 100%;
+    max-height: 800px;
 }
 
 img.showAll {
-  max-width: 100%;
-  max-height:100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
-img.chef_picture{
-	height: 40.0em;
-	width: 30.0em;
-	align-self: center;
-	border-radius: 10px;
-	overflow: hidden;
+img.chef_picture {
+    height: 40.0em;
+    width: 30.0em;
+    align-self: center;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.chefBuffetTextContainer{
-  	display: flex;
-	/*this centers the text horizontally*/
-	justify-content: center;
-	text-align: center; 
-	height : 40.0em;
-	margin-left: 6.5em;
+.chefBuffetTextContainer {
+    display: flex;
+    /*this centers the text horizontally*/
+    justify-content: center;
+    text-align: center;
+    height: 40.0em;
+    margin-left: 6.5em;
 }
 
 .chefBuffetText {
-	font-family: monospace;
-	font-size: 1.5em;
-	margin: 10px;
-	}
-	
-	
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+    font-family: monospace;
+    font-size: 1.5em;
+    margin: 10px;
 }
 
-button.login{
-  background-color: #1BA41C;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button.login {
+    background-color: #1BA41C;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button.loginErase {
+    background-color: #ff211e;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
 }
 
 button:hover {
-  opacity: 0.75;
+    opacity: 0.75;
 }
 
-.flexContainer{
-	display: flex;
-	justify-content: center;
-	height: 95%;
+.flexContainer {
+    display: flex;
+    justify-content: center;
+    height: 95%;
 }
 
-.showContainer{
-	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
-	width: 100%;
-	height: 95%;
+.showContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 95%;
 }
 
-.show{
-	align-items: flex-start;
-	justify-content: flex-start;
-	flex: 1 0 45%;
+.show {
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex: 1 0 45%;
 }
 
-.showAllContainer{
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	flex-wrap: wrap;
-	overflow: hidden;
-	background-color: black;
+.showAllContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+    overflow: hidden;
+    background-color: black;
 }
-.showAll img{
-	max-width: 500px;
-	max-height: 500px;
+
+.showAll img {
+    width: 35.0em;
+    height: auto;
+    border-radius: 1000px;
+    padding: 10px;
 }
-.showAll{
-	flex-direction : row;
-	align-items: flex-start;
-	justify-content: flex-start;
-	overflow:hidden;
-	flex: 1 0 25%;
+
+.showAll {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow: hidden;
+    flex: 1 0 25%;
+    margin: 2%;
+
+}
+
+button.showAllButton {
+    background-color: #666490;
+    border-radius: 500px;
+    min-height: 500px;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .container {
-	padding: 16px;
-	background-color: #8A8A8A;
-	align-self: center;
-	border-radius: 20px;
+    padding: 16px;
+    background-color: #8A8A8A;
+    align-self: center;
+    border-radius: 20px;
 }
 
 span.psw {
-  float: right;
-  padding-top: 16px;
+    float: right;
+    padding-top: 16px;
 }
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
+    span.psw {
+        display: block;
+        float: none;
+    }
+
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+.logoutFlex {
+    padding-top: 10%;
+}
+
+.centerDiv {
+    justify-content: center;
+    align-content: center;
+}
+
+button.logout {
+    align-self: center;
+    justify-self: center;
+    background-color: #1BA41C;
+    color: white;
+    padding: 20px;
+    margin: 3%;
+    border: none;
+    cursor: pointer;
+    width: 90%;
+    font-size: 1.5em;
+}
+
+.adminCommandFlex {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.adminCommand {
+    flex: 29%;
+    margin: 2%;
+    font-size: 3.0em;
+}
+
+button.homeButton {
+    align-self: center;
+    justify-self: center;
+    background-color: #009590;
+    color: white;
+    padding: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.0em;
+    border-radius: 500px;
+}
+
+button.adminCommandButton {
+    align-self: center;
+    justify-self: center;
+    background-color: #57c5ff;
+    color: white;
+    padding: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.0em;
+    border-radius: 500px;
+}
+
+.modifierButtonFlex {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.modifierFlex {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+img.modifierFlex {
+    flex: 40%;
+    margin: 10%;
+}
+
+.modifiedImage {
+    max-width: 50%;
+    max-height: 50%;
+    margin: 2%;
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org"
-     >
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8"/>
@@ -11,11 +11,18 @@
 
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
-<h4>Dettagli Ingrediente</h4>
+<h3>Dettagli Ingrediente</h3>
 <div class="showContainer">
     <div class="show">
         <img th:src="${ingrediente.immagine}" class="show"
              alt="Ingredient picture"/>
+        <div sec:authorize-url="/admin" class="adminButton">
+            <h1>
+                <a th:href="@{'/admin/modificaingrediente/' + ${ingrediente.getId()}}">
+                    <button class="adminCommandButton">Modifica Ingrediente</button>
+                </a>
+            </h1>
+        </div>
     </div>
     <div class="show">
         <div class="BuffetTextContainer">

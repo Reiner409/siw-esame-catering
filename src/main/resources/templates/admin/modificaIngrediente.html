@@ -3,68 +3,74 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="/css/style.css" />
-<title>index</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>index</title>
 </head>
 
 <body>
-	<header th:replace="fragments/base.html :: intestazione"></header>
-	<div>
-		<h4 th:text="#{header.registra}">Modifica Ingrediente</h4>
-		<form method="POST" enctype="multipart/form-data"
-			th:action="@{'/admin/modificaingrediente/' + ${ingrediente.id}}" th:object="${ingrediente}">
-			<table>
-				<tr>
-					<td>Nome</td>
-					<td><input type="text" placeholder="Nome dell'ingrediente"
-						required th:field="*{nome}" /></td>
-					<td th:if="${#fields.hasErrors('nome')}"
-						th:errors="*{nome}" th:style="'color:red'"></td>
-				</tr>
-				<tr>
-					<td>Origine</td>
-					<td><input type="text" placeholder="Origine dell'ingrediente"
-						required th:field="*{origine}" /></td>
-					<td th:if="${#fields.hasErrors('origine')}"
-						th:errors="*{origine}" th:style="'color:red'"></td>
-				</tr>
-				<tr>
-					<td>Descrizione</td>
-					<td><input type="text"
-						placeholder="Descrizione dell'ingrediente" required
-						th:field="*{descrizione}" /></td>
-					<td th:if="${#fields.hasErrors('descrizione')}"
-						th:errors="*{descrizione}" th:style="'color:red'"></td>
-				</tr>
-				<tr>
-					<div th:if="${#fields.hasErrors('global')}">
-						<h3>Global errors:</h3>
-						<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
-					</div>
-				</tr>
-				<tr>
-					<td>
-						<p>Modifica immagine:</p> <input type="file" accept="image/*"
-						class="custom-file-input" id="customFile" name="file">
-					</td>
-				</tr>
-				<tr>
-					<div th:if="${#fields.hasErrors('global')}">
-						<h3>Global errors:</h3>
-						<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
-					</div>
-				</tr>
-				<tr>
-					<td>
-						<button type="submit" class="login">Modifica Ingrediente</button> 
-						<a th:href="@{'/admin/deleteingrediente/' + ${ingrediente.id}}"><button type="button" class="login">Elimina Ingrediente</button></a> 
-					
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
-	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<div>
+    <h3 th:text="#{header.registra}">Modifica Ingrediente</h3>
+    <form method="POST" enctype="multipart/form-data"
+          th:action="@{'/admin/modificaingrediente/' + ${ingrediente.id}}" th:object="${ingrediente}">
+        <div class="modifierFlex">
+            <img th:src="${ingrediente.immagine}" alt="Buffet picture" class="modifiedImage"/>
+
+            <table>
+                <tr>
+                    <td>Nome</td>
+                    <td><input type="text" placeholder="Nome dell'ingrediente"
+                               required th:field="*{nome}"/></td>
+                    <td th:if="${#fields.hasErrors('nome')}"
+                        th:errors="*{nome}" th:style="'color:red'"></td>
+                </tr>
+                <tr>
+                    <td>Origine</td>
+                    <td><input type="text" placeholder="Origine dell'ingrediente"
+                               required th:field="*{origine}"/></td>
+                    <td th:if="${#fields.hasErrors('origine')}"
+                        th:errors="*{origine}" th:style="'color:red'"></td>
+                </tr>
+                <tr>
+                    <td>Descrizione</td>
+                    <td><input type="text"
+                               placeholder="Descrizione dell'ingrediente" required
+                               th:field="*{descrizione}"/></td>
+                    <td th:if="${#fields.hasErrors('descrizione')}"
+                        th:errors="*{descrizione}" th:style="'color:red'"></td>
+                </tr>
+                <tr>
+                    <div th:if="${#fields.hasErrors('global')}">
+                        <h3>Global errors:</h3>
+                        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
+                    </div>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Modifica immagine:</p> <input type="file" accept="image/*"
+                                                         class="custom-file-input" id="customFile" name="file">
+                    </td>
+                </tr>
+                <tr>
+                    <div th:if="${#fields.hasErrors('global')}">
+                        <h3>Global errors:</h3>
+                        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
+                    </div>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" class="login">Modifica Ingrediente</button>
+                        <a th:href="@{'/admin/deleteingrediente/' + ${ingrediente.id}}">
+                            <button type="button" class="loginErase">Elimina Ingrediente</button>
+                        </a>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

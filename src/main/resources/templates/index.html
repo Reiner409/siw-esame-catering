@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="/css/style.css"/>
@@ -11,23 +11,30 @@
 <header th:replace="fragments/base.html :: intestazione"></header>
 
 <div class="flex-container">
-    <div>
-        <p>
-            <a th:href="@{/login}">Login</a>
-        </p>
-        <p>
-            <a th:href="@{/logout}">Logout</a>
-        </p>
-        <p>
-            <a th:href="@{/admin/home}">Admin Commands</a>
-        </p>
-        <p>
-        <h1>
-            <div sec:authorize-url="/admin">
-                This will only be displayed if authenticated user has a role computed by the controller.
-            </div>
-        </h1>
-        </p>
+    <div class="loginContainer">
+
+        <div sec:authorize="!isAuthenticated()" class="loginButton">
+            <a th:href="@{/login}">
+                <button class="login">Login</button>
+            </a>
+        </div>
+
+        <div sec:authorize="isAuthenticated()" class="loginButton">
+            <h2>
+                <div>Ciao,</div>
+                <div sec:authentication="name"></div>
+                <a th:href="@{/logout}">Logout</a>
+            </h2>
+        </div>
+
+        <div sec:authorize-url="/admin" class="adminButton">
+            <h1>
+                <a th:href="@{/admin/home}">
+                    <button class="login">Admin Commands</button>
+                </a>
+            </h1>
+        </div>
+
     </div>
     <div class="titleContainer">
         <img class="bg-image" src="/images/service.png" alt="Service picture"/>

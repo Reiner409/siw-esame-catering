@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,7 +111,7 @@ public class BuffetController {
 				buffet.setImmagine(Shared.SavePicture(buffet.getId(), pictureFolder, image));
 				buffetService.save(buffet);
 			}
-			return "admin/creationSuccess";
+			return "redirect:/show/buffet/"+idBuffet;
 		}
 		else
 		{
@@ -123,8 +124,10 @@ public class BuffetController {
 	{
 		model.addAttribute("buffet", new Buffet());
 		model.addAttribute("piatti", piattoService.findAll());
+		model.addAttribute("piattiSelected", new LinkedList<Piatto>());
 		model.addAttribute("chefs",this.chefService.findAll());
-		
+		model.addAttribute("chef",null);
+
 		return "admin/createBuffet";
 	}
 	
@@ -137,13 +140,16 @@ public class BuffetController {
 			Model model)
 	{
 		this.buffetValidator.validate(buffet, buffetBindingResult);
+
+		List<Piatto> piatti = new ArrayList<>();
+		for (Long idPiatto : idPiatti) {
+			piatti.add(this.piattoService.findById(idPiatto));
+		}
+
 		if(!buffetBindingResult.hasErrors())
 		{
-			List<Piatto> ingredienti = new ArrayList<>();
-			for (Long idIngr : idPiatti) {
-				ingredienti.add(this.piattoService.findById(idIngr));
-			}
-			buffet.setPiatti(ingredienti);
+
+			buffet.setPiatti(piatti);
 			
 			Chef chef = this.chefService.findById(idChef);
 			buffet.setChef(chef);
@@ -155,10 +161,14 @@ public class BuffetController {
 
 			buffet.setImmagine(Shared.SavePicture(buffet.getId(), pictureFolder, image));
 			buffetService.save(buffet);
-			return "admin/creationSuccess";
+			return "redirect:/show/buffet/"+buffet.getId();
 		}
 		else
 		{
+			model.addAttribute("chef", this.chefService.findById(idChef));
+			model.addAttribute("piatti",this.piattoService.findAll());
+			model.addAttribute("piattiSelected",piatti);
+			model.addAttribute("chefs",this.chefService.findAll());
 			return "admin/createBuffet";
 		}
 	}

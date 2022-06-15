@@ -54,7 +54,7 @@ public class IngredientController {
 			ingredienteService.save(ingrediente);
 			ingrediente.setImmagine(Shared.SavePicture(ingrediente.getId(), pictureFolder, image));
 			ingredienteService.save(ingrediente);
-			return "admin/creationSuccess";
+			return "redirect:/show/ingrediente/"+ingrediente.getId();
 		} else {
 			return "admin/createIngrediente";
 		}
@@ -73,7 +73,7 @@ public class IngredientController {
 			BindingResult ingredientBindingResult,
 			Model model) {
 		
-		this.ingredienteValidator.validate(ingrediente, ingredientBindingResult);
+		this.ingredienteValidator.validateUpdate(ingrediente, ingredientBindingResult);
 		
 		if (!ingredientBindingResult.hasErrors()) {
 			
@@ -87,7 +87,7 @@ public class IngredientController {
 			}
 
 			model.addAttribute("ingrediente", this.ingredienteService.findById(id));
-			return "admin/creationSuccess";
+			return "redirect:/show/ingrediente/"+id;
 		} else {
 			return "admin/modificaIngrediente";
 		}

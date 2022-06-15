@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class PiattoController {
 	{
 		model.addAttribute("piatto", new Piatto());
 		model.addAttribute("ingredienti", ingredienteService.findAll());
+		model.addAttribute("ingredientiSelected", new LinkedList<Ingrediente>());
 		
 		return "admin/createPiatto";
 	}
@@ -62,21 +64,25 @@ public class PiattoController {
 			Model model)
 	{
 		this.piattoValidator.validate(piatto, piattoBindingResult);
-		
+
+		List<Ingrediente> ingredienti = new ArrayList<>();
+		for (Long idIngr : idingredienti) {
+			ingredienti.add(this.ingredienteService.findById(idIngr));
+		}
+
 		if(!piattoBindingResult.hasErrors())
 		{
-			List<Ingrediente> ingredienti = new ArrayList<>();
-			for (Long idIngr : idingredienti) {
-				ingredienti.add(this.ingredienteService.findById(idIngr));
-			}
 			piatto.setIngredienti(ingredienti);
 			piattoService.save(piatto);
 			piatto.setImmagine(Shared.SavePicture(piatto.getId(), "/images/piatto/", image));
 			piattoService.save(piatto);
-			return "admin/creationSuccess";
+			return "redirect:/show/piatto/"+piatto.getId();
 		}
 		else
 		{
+
+			model.addAttribute("ingredienti", ingredienteService.findAll());
+			model.addAttribute("ingredientiSelected", ingredienti);
 			return "admin/createPiatto";
 		}
 	}
@@ -117,7 +123,7 @@ public class PiattoController {
 			piatto.setImmagine(Shared.SavePicture(piatto.getId(), "/images/piatto/", image));
 			piattoService.save(piatto);
 			}
-			return "admin/creationSuccess";
+			return "redirect:/show/piatto/"+id;
 		}
 		else
 		{

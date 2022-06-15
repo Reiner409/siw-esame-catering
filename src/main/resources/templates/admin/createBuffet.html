@@ -11,7 +11,7 @@
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
 <div>
-    <h4 th:text="#{header.registra}">Creazione Buffet</h4>
+    <h3 th:text="#{header.registra}">Creazione Buffet</h3>
     <form th:action="@{/admin/createbuffet}" method="POST"
           enctype="multipart/form-data" th:object="${buffet}">
         <table>
@@ -33,8 +33,9 @@
                 <td>Seleziona lo chef:</td>
                 <td><select th:name="idchef">
                     <option value="0">Seleziona uno Chef</option>
-                    <option th:each="chef : ${chefs}" th:value="${chef.id}"
-                            th:text="${chef.nome} + ' '+ ${chef.cognome}"></option>
+                    <option th:each="che : ${chefs}" th:value="${che.id}"
+                            th:text="${che.nome} + ' '+ ${che.cognome}"
+                            th:selected="${che.equals(chef)}"></option>
                 </select></td>
             </tr>
             <tr>
@@ -43,7 +44,7 @@
                     <ul>
                         <li th:each="piatto : ${piatti}"><input type="checkbox"
                                                                 th:value="${piatto.id}" th:text="${piatto.nome}"
-                                                                th:name="idpiatti"/></li>
+                                                                th:name="idpiatti" th:checked="${piattiSelected.contains(piatto)}"/></li>
                     </ul>
                 </td>
             </tr>
@@ -67,6 +68,6 @@
         </table>
     </form>
 </div>
-<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+<footer th:replace="fragments/base.html :: fondo(home='/admin/home')"></footer>
 </body>
 </html>

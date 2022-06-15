@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="/css/style.css" />
-<title>index</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>index</title>
 </head>
 
 <body>
-	<header th:replace="fragments/base.html :: intestazione"></header>
-	<div class="showContainer">
-		<div class="show">
-			<img th:src="${piatto.immagine}" class="show"
-				alt="plate picture" />
-		</div>
-		<div class="show">
-			<div class="BuffetTextContainer">
-				<div class="chefBuffetText">
-					<h1 th:text="${piatto.nome}">Nome</h1>
-					<h1 th:text="${piatto.descrizione}">Descrizione</h1>
-					<div th:each="ingrediente : ${piatto.ingredienti}">
-						<a th:href="@{'/show/ingrediente/' + ${ingrediente.id}}"
-							th:text="${ingrediente.nome}"> Ingrediente </a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<h3>Dettagli Piatto</h3>
+<div class="showContainer">
+    <div class="show">
+        <img th:src="${piatto.immagine}" class="show"
+             alt="plate picture"/>
+        <div sec:authorize-url="/admin" class="adminButton">
+            <h1>
+                <a th:href="@{'/admin/modificapiatto/' + ${piatto.getId()}}">
+                    <button class="adminCommandButton">Modifica Piatto</button>
+                </a>
+            </h1>
+        </div>
+    </div>
+    <div class="show">
+        <div class="BuffetTextContainer">
+            <div class="chefBuffetText">
+                <h1 th:text="${piatto.nome}">Nome</h1>
+                <h1 th:text="${piatto.descrizione}">Descrizione</h1>
+                <h2>
+                    <div th:each="ingrediente : ${piatto.ingredienti}">
+                        <a th:href="@{'/show/ingrediente/' + ${ingrediente.id}}"
+                           th:text="${ingrediente.nome}"> Ingrediente </a>
+                    </div>
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

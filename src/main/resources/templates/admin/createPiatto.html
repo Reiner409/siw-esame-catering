@@ -2,61 +2,62 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="/css/style.css" />
-<title>index</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>index</title>
 </head>
 
 <header th:replace="fragments/base.html :: intestazione"></header>
 <div>
-	<h4 th:text="#{header.registra}">Creazione Ingrediente</h4>
-	<form th:action="@{/admin/createpiatto}" method="POST" enctype="multipart/form-data" th:object="${piatto}">
-		<table>
-			<tr>
-				<td>Nome</td>
-				<td><input type="text" placeholder="Nome del piatto" required
-					th:field="*{nome}" /></td>
-				<td th:if="${#fields.hasErrors('nome')}"
-					th:errors="*{nome}" th:style="'color:red'"></td>
-			</tr>
-			<tr>
-				<td>Descrizione</td>
-				<td><input type="text" placeholder="Descrizione del piatto"
-					required th:field="*{descrizione}" /></td>
-				<td th:if="${#fields.hasErrors('descrizione')}"
-					th:errors="*{descrizione}" th:style="'color:red'"></td>
-			</tr>
-			<tr>	
-				<td>Seleziona gli ingredienti appartenenti al tuo piatto</td>
-				<td>
-					<ul>
-						<li th:each="ingrediente : ${ingredienti}">
-						<input	type="checkbox" th:value="${ingrediente.id}"
-							th:text="${ingrediente.nome}" th:name="idingredienti" /></li>
-					</ul>
-				</td>
-			</tr>
-			<tr>
-				<div th:if="${#fields.hasErrors('global')}">
-					<h3>Global errors:</h3>
-					<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
-				</div>
-			</tr>
-			<tr>
-				<td>
-					<p>Seleziona un'immagine:</p> <input type="file" accept="image/*"
-					class="custom-file-input" id="customFile" name="file">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<button type="submit" class="login">Crea Piatto</button>
-				</td>
-			</tr>
-		</table>
-	</form>
+    <h3 th:text="#{header.registra}">Creazione Ingrediente</h3>
+    <form th:action="@{/admin/createpiatto}" method="POST" enctype="multipart/form-data" th:object="${piatto}">
+        <table>
+            <tr>
+                <td>Nome</td>
+                <td><input type="text" placeholder="Nome del piatto" required
+                           th:field="*{nome}"/></td>
+                <td th:if="${#fields.hasErrors('nome')}"
+                    th:errors="*{nome}" th:style="'color:red'"></td>
+            </tr>
+            <tr>
+                <td>Descrizione</td>
+                <td><input type="text" placeholder="Descrizione del piatto"
+                           required th:field="*{descrizione}"/></td>
+                <td th:if="${#fields.hasErrors('descrizione')}"
+                    th:errors="*{descrizione}" th:style="'color:red'"></td>
+            </tr>
+            <tr>
+                <td>Seleziona gli ingredienti appartenenti al tuo piatto</td>
+                <td>
+                    <ul>
+                        <li th:each="ingrediente : ${ingredienti}">
+                            <input type="checkbox" th:value="${ingrediente.id}"
+                                   th:text="${ingrediente.nome}" th:name="idingredienti"
+                                   th:checked="${ingredientiSelected.contains(ingrediente)}"/></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <div th:if="${#fields.hasErrors('global')}">
+                    <h3>Global errors:</h3>
+                    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
+                </div>
+            </tr>
+            <tr>
+                <td>
+                    <p>Seleziona un'immagine:</p> <input type="file" accept="image/*"
+                                                         class="custom-file-input" id="customFile" name="file">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" class="login">Crea Piatto</button>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
-<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+<footer th:replace="fragments/base.html :: fondo(home='/admin/home')"></footer>
 
 <body></body>
 </html>

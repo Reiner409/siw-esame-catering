@@ -55,7 +55,7 @@ public class ChefController {
 			chefService.save(chef);
 			chef.setImmagine(Shared.SavePicture(chef.getId(), "/images/chef/", image));
 			chefService.save(chef);
-			return "admin/creationSuccess";
+			return "redirect:/show/chef/"+chef.getId();
 		} else {
 			return "admin/createChef";
 		}
@@ -84,7 +84,7 @@ public class ChefController {
 				original.setImmagine(Shared.SavePicture(original.getId(), "/images/chef/", image));
 				chefService.save(original);
 			}
-			return "admin/creationSuccess";
+			return "redirect:/show/chef/"+id;
 		} else {
 			return "admin/modificaChef";
 		}

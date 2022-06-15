@@ -3,19 +3,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="/css/style.css" />
-<title>index</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>index</title>
 </head>
 
 <body>
-	<header th:replace="fragments/base.html :: intestazione"></header>
-	<form name="logoutForm" th:action="@{/logout}" method="post">
-		<p>Vuoi veramente effettuare il logout?</p>
-		<button type="submit" class="login">Logout</button>
-		<a th:href="@{'/index'}"><button type="button" class="login">Home</button></a>
-					
-	</form>
-	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<form name="logoutForm" th:action="@{/logout}" method="post">
+    <h2>
+        <p>Vuoi veramente effettuare il logout?</p>
+        <div class="logoutFlex">
+            <button type="submit" class="logout">Logout</button>
+            <div class="centerDiv">
+                <a th:href="@{'/index'}">
+                    <button type="button" class="logout">Home</button>
+                </a>
+            </div>
+        </div>
+    </h2>
+</form>
+<!--	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>-->
 </body>
 </html>

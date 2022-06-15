@@ -10,15 +10,30 @@
 
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
-<p>Creazioni</p>
-<h1>
-    <ul>
-        <li><a th:href="@{/admin/createchef}">Crea Chef</a></li>
-        <li><a th:href="@{/admin/createbuffet}">Crea Buffet</a></li>
-        <li><a th:href="@{/admin/createpiatto}">Crea Piatto</a></li>
-        <li><a th:href="@{/admin/createingrediente}">Crea Ingrediente</a></li>
-    </ul>
-</h1>
+<p>
+<h2>ADMIN COMMANDS</h2></p>
+<div class="adminCommandFlex">
+    <div class="adminCommand">
+        <a th:href="@{/admin/createchef}">
+            <button class="adminCommandButton">Crea Chef</button>
+        </a>
+    </div>
+    <div class="adminCommand">
+        <a th:href="@{/admin/createbuffet}">
+            <button class="adminCommandButton">Crea Buffet</button>
+        </a>
+    </div>
+    <div class="adminCommand">
+        <a th:href="@{/admin/createpiatto}">
+            <button class="adminCommandButton">Crea Piatto</button>
+        </a>
+    </div>
+    <div class="adminCommand">
+        <a th:href="@{/admin/createingrediente}">
+            <button class="adminCommandButton">Crea Ingrediente</button>
+        </a>
+    </div>
+</div>
 <footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
 </body>
 </html>

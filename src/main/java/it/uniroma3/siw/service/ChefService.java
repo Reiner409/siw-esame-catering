@@ -65,7 +65,7 @@ public class ChefService implements IServices<Chef> {
 		Collections.shuffle(allChefs);
 		
 		for (Chef c : allChefs) {
-			if (counter == 3)
+			if (counter == 4	)
 				break;
 			if (c.getBuffet().size() != 0) {
 				chefs.add(c);

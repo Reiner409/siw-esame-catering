@@ -10,7 +10,7 @@
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div>
-		<h4 th:text="#{header.registra}">Creazione Ingrediente</h4>
+		<h3 th:text="#{header.registra}">Creazione Ingrediente</h3>
 		<form th:action="@{/admin/createingrediente}" method="POST" enctype="multipart/form-data" th:object="${ingrediente}">
 			<table>
 				<tr>
@@ -55,6 +55,6 @@
 			</table>
 		</form>
 	</div>
-	<footer th:replace="fragments/base.html :: fondo(home='/')"></footer>
+	<footer th:replace="fragments/base.html :: fondo(home='/admin/home')"></footer>
 </body>
 </html>

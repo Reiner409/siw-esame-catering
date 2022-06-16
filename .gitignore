@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/static/images/chef/
+/src/main/resources/static/images/buffet/
+/src/main/resources/static/images/ingrediente/
+/src/main/resources/static/images/piatto/

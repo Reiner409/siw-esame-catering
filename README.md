@@ -3,6 +3,10 @@
 Progetto d'esame fornito dal professor Merialdo per quanto riguarda il corso Sistemi Informativi sul Web.
 A seguire vi sono le specifiche fornite e qualche caso d'uso.
 
+Versione finale rilasciata mediante Heroku.
+Il sito web è il seguente: 
+- https://siw-esame.herokuapp.com/
+
 ## Catering
 
 - Dobbiamo progettare e implementare il sistema informativo di una società che offre servizi di catering.

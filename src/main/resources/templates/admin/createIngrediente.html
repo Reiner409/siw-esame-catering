@@ -14,22 +14,22 @@
 		<form th:action="@{/admin/createingrediente}" method="POST" enctype="multipart/form-data" th:object="${ingrediente}">
 			<table>
 				<tr>
-					<td>Nome</td>
-					<td><input type="text" placeholder="Nome dell'ingrediente"
+					<td><h2>Nome</h2>
+						<input type="text" placeholder="Nome dell'ingrediente"
 						required th:field="*{nome}" /></td>
 					<td th:if="${#fields.hasErrors('nome')}"
 						th:errors="*{nome}" th:style="'color:red'"></td>
 				</tr>
 				<tr>
-					<td>Origine</td>
-					<td><input type="text" placeholder="Origine dell'ingrediente"
+					<td><h2>Origine</h2>
+						<input type="text" placeholder="Origine dell'ingrediente"
 						required th:field="*{origine}" /></td>
 					<td th:if="${#fields.hasErrors('origine')}"
 						th:errors="*{origine}" th:style="'color:red'"></td>
 				</tr>
 				<tr>
-					<td>Descrizione</td>
-					<td><input type="text"
+					<td><h2>Descrizione</h2>
+						<input type="text"
 						placeholder="Descrizione dell'ingrediente" required
 						th:field="*{descrizione}" /></td>
 					<td th:if="${#fields.hasErrors('descrizione')}"
@@ -37,7 +37,7 @@
 				</tr>
 				<tr>
 					<td>
-						<p>Seleziona un'immagine:</p> <input type="file" accept="image/*"
+						<p><h2>Seleziona un'immagine:</h2></p> <input type="file" accept="image/*"
 						class="custom-file-input" id="customFile" name="file">
 					</td>
 				</tr>

@@ -11,35 +11,37 @@
 
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
+<h1 class="centerTitle">Dettagli buffet</h1>
 <div>
-    <h3>Dettagli buffet</h3>
     <div class="showContainer">
         <div class="show">
-            <img th:src="${buffet.immagine}" class="show" alt="Buffet picture"/>
+            <img th:src="${buffet.immagine}" alt="Buffet picture"/>
+            <h1 th:text="'Nome: ' + ${buffet.nome}">a</h1>
+            <h1 th:text="'Descrizione: ' + ${buffet.descrizione}">a</h1>
             <h1> Studiato da
                 <a th:href="'/show/chef/' + ${buffet.getChef().getId()}"
                    th:text="${buffet.getChef().getNominativo()}">Nome Chef</a>
             </h1>
+
+        </div>
+        <div class="show">
+            <div class="BuffetTextContainer">
+                <div class="chefBuffetText">
+                    <h1 class="showText">Lista dei Piatti</h1>
+                    <ul>
+                        <li th:each="piatto : ${buffet.piatti}">
+                            <h2><a th:href="@{'/show/piatto/' + ${piatto.id}}"
+                               th:text="${piatto.nome}"> piatto </a></h2>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div sec:authorize-url="/admin" class="adminButton">
                 <h1>
                     <a th:href="@{'/admin/modificabuffet/' + ${buffet.getId()}}">
                         <button class="adminCommandButton">Modifica Buffet</button>
                     </a>
                 </h1>
-            </div>
-        </div>
-        <div class="show">
-            <div class="BuffetTextContainer">
-                <div class="chefBuffetText">
-                    <h1 th:text="${buffet.nome}">a</h1>
-                    <h1 th:text="${buffet.descrizione}">a</h1>
-                    <h2>
-                        <div th:each="piatto : ${buffet.piatti}">
-                            <a th:href="@{'/show/piatto/' + ${piatto.id}}"
-                               th:text="${piatto.nome}"> piatto </a>
-                        </div>
-                    </h2>
-                </div>
             </div>
         </div>
     </div>

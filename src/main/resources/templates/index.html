@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="/css/style.css"/>
@@ -23,11 +24,13 @@
             <h2>
                 <div>Ciao,</div>
                 <div sec:authentication="name"></div>
-                <a th:href="@{/logout}">Logout</a>
+                <form th:action="@{/logout}" method="POST">
+                    <button class="logout" type="submit">Logout</button>
+                </form>
             </h2>
         </div>
 
-        <div sec:authorize-url="/admin" class="adminButton">
+        <div sec:authorize-url="/admin" class="adminCommandsButton">
             <h1>
                 <a th:href="@{/admin/home}">
                     <button class="login">Admin Commands</button>
@@ -64,17 +67,19 @@
     </div>
     <div class="chefs_container">
         <div class="singleton_chef_container" th:each="buffet : ${buffets}">
-            <a th:href="@{'/show/chef/' + ${buffet.getChef().getId()}}">
-                <img th:src="${buffet.getChef().getImmagine()}" class="chef_picture" alt="Chef picture"/>
-            </a>
+            <div class="chef_picture">
+                <a th:href="@{'/show/chef/' + ${buffet.getChef().getId()}}">
+                    <img th:src="${buffet.getChef().getImmagine()}" alt="Chef picture" />
+                </a>
+            </div>
             <div class="chefBuffetTextContainer">
-                <div class="chefBuffetText">
+                <div class="chefIndexBuffetText">
                     <h1>
                         <a th:href="@{'/show/buffet/' + ${buffet.id}}"
                            th:text="${buffet.nome}"> a </a>
                     </h1>
                     <div th:each="piatto : ${buffet.piatti}">
-                        <div th:text="${piatto.nome}">piatto</div>
+                       <h2> <div th:text="${piatto.nome}">piatto</div></h2>
                     </div>
                 </div>
             </div>

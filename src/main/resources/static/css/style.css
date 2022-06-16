@@ -40,6 +40,12 @@ a {
 }
 
 .adminButton {
+    margin-top: 10%;
+    align-self: center;
+    justify-self: center;
+}
+
+.adminCommandsButton {
     align-self: flex-start;
     justify-self: flex-start;
 }
@@ -178,11 +184,9 @@ a {
 }
 
 .singleton_chef_container {
-    padding: 30px;
+    padding: 10px;
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex: 1 0 45%;
+    width: 100%;
 }
 
 
@@ -197,33 +201,73 @@ img.showAll {
     max-height: 100%;
 }
 
-img.show {
+.show img {
     min-height: 500px;
     max-width: 100%;
     max-height: 800px;
-}
-
-img.chef_picture {
-    height: 40.0em;
-    width: 30.0em;
+    border-radius: 50px;
+    justify-self: center;
     align-self: center;
-    border-radius: 10px;
-    overflow: hidden;
 }
 
 .chefBuffetTextContainer {
     display: flex;
-    /*this centers the text horizontally*/
-    justify-content: center;
     text-align: center;
     height: 40.0em;
     margin-left: 6.5em;
 }
 
+img .chefPicContainer
+{
+    justify-self: flex-start;
+    align-self: flex-start;
+}
+
+.chef_picture {
+    height: 40.0em;
+    width: 30.0em;
+    align-content: flex-start;
+    justify-content: flex-start;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.chef_picture img{
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 40px;
+}
+
 .chefBuffetText {
     font-family: monospace;
     font-size: 1.5em;
-    margin: 10px;
+    margin-inline: 10px;
+    background: #986647;
+    display: inline-block;
+    border-radius: 50px;
+    padding: 30px;
+}
+
+.chefIndexBuffetText {
+    font-family: monospace;
+    font-size: 1.5em;
+    margin: 3px;
+    background: #090a5e;
+    display: inline-block;
+    border-radius: 30px;
+    padding: 30px;
+    text-align: center;
+    min-width: 500px;
+    justify-self: center;
+
 }
 
 
@@ -244,17 +288,47 @@ button.login {
     border: none;
     cursor: pointer;
     width: 100%;
+    border-radius: 20px;
 }
 
-button.loginErase {
-    background-color: #ff211e;
+button.loginConfermaModifica {
+    background-color: #1BA41C;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 100%;
+    border-radius: 20px;
+    margin-top: 10%;
 }
+
+button.loginErase {
+    background-color: #ff211e;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 20px;
+    margin: 10% 0 8px;
+}
+
+.logout  {
+    background-color: rgba(255, 255, 255, 0.20);
+    font-weight: bold;
+    font-size: 0.5em;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 20px;
+
+}
+
+
 
 button:hover {
     opacity: 0.75;
@@ -268,16 +342,34 @@ button:hover {
 
 .showContainer {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
     width: 100%;
     height: 95%;
 }
 
 .show {
-    align-items: flex-start;
-    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    padding-left: 3%;
     flex: 1 0 45%;
+}
+
+.showModifica {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column;
+    padding-left: 3%;
+    flex: 1 0 45%;
+}
+
+.showTextIngrediente {
+    color: #272724;
+    font-size: 2.2em;
+}
+
+.showText {
+    color: #ffffff;
+    font-size: 2.2em;
 }
 
 .showAllContainer {
@@ -351,18 +443,18 @@ span.psw {
     align-content: center;
 }
 
-button.logout {
-    align-self: center;
-    justify-self: center;
-    background-color: #1BA41C;
-    color: white;
-    padding: 20px;
-    margin: 3%;
-    border: none;
-    cursor: pointer;
-    width: 90%;
-    font-size: 1.5em;
-}
+/*button.logout {*/
+/*    align-self: center;*/
+/*    justify-self: center;*/
+/*    background-color: #1BA41C;*/
+/*    color: white;*/
+/*    padding: 20px;*/
+/*    margin: 3%;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    width: 90%;*/
+/*    font-size: 1.5em;*/
+/*}*/
 
 .adminCommandFlex {
     display: flex;
@@ -375,9 +467,7 @@ button.logout {
     font-size: 3.0em;
 }
 
-button.homeButton {
-    align-self: center;
-    justify-self: center;
+.homeButton {
     background-color: #009590;
     color: white;
     padding: 20px;
@@ -385,6 +475,12 @@ button.homeButton {
     cursor: pointer;
     font-size: 1.0em;
     border-radius: 500px;
+    left: 0;
+    z-index: 3;
+    position: fixed;
+    bottom: 10%;
+    align-self: center;
+    justify-self: center;
 }
 
 button.adminCommandButton {
@@ -420,3 +516,79 @@ img.modifiedImage {
     max-height: 800px;
 }
 
+.centerTitle{
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+/*CUSTOM CHECKBOX_CODE*/
+
+/* The container */
+.containerCheck {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.containerCheck input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheck:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheck input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheck input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheck .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

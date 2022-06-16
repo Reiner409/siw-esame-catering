@@ -11,32 +11,33 @@
 
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
-<h3>Dettagli Piatto</h3>
+<h1 class="centerTitle">Dettagli Piatto</h1>
 <div>
     <div class="showContainer">
         <div class="show">
-            <img th:src="${piatto.immagine}" class="show"
+            <img th:src="${piatto.immagine}" class="showPic"
                  alt="plate picture"/>
+            <h1 th:text="'Nome: ' + ${piatto.nome}">Nome</h1>
+            <h1 th:text="'Descrizione: ' + ${piatto.descrizione}">Descrizione</h1>
+        </div>
+        <div class="show">
+            <div class="BuffetTextContainer">
+                <div class="chefBuffetText">
+                    <h1 class="showText">Lista degli Ingredienti</h1>
+                    <ul>
+                        <li th:each="ingrediente : ${piatto.ingredienti}">
+                            <h2><a th:href="@{'/show/ingrediente/' + ${ingrediente.id}}"
+                                   th:text="${ingrediente.nome}"> Ingrediente </a></h2>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div sec:authorize-url="/admin" class="adminButton">
                 <h1>
                     <a th:href="@{'/admin/modificapiatto/' + ${piatto.getId()}}">
                         <button class="adminCommandButton">Modifica Piatto</button>
                     </a>
                 </h1>
-            </div>
-        </div>
-        <div class="show">
-            <div class="BuffetTextContainer">
-                <div class="chefBuffetText">
-                    <h1 th:text="${piatto.nome}">Nome</h1>
-                    <h1 th:text="${piatto.descrizione}">Descrizione</h1>
-                    <h2>
-                        <div th:each="ingrediente : ${piatto.ingredienti}">
-                            <a th:href="@{'/show/ingrediente/' + ${ingrediente.id}}"
-                               th:text="${ingrediente.nome}"> Ingrediente </a>
-                        </div>
-                    </h2>
-                </div>
             </div>
         </div>
     </div>

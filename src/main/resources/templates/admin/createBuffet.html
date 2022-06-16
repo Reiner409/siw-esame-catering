@@ -16,22 +16,22 @@
           enctype="multipart/form-data" th:object="${buffet}">
         <table>
             <tr>
-                <td>Nome</td>
-                <td><input type="text" placeholder="Nome del Buffet" required
+                <td><h2>Nome</h2>
+                    <input type="text" placeholder="Nome del Buffet" required
                            th:field="*{nome}"/></td>
                 <td th:if="${#fields.hasErrors('nome')}"
                     th:errors="*{nome}" th:style="'color:red'"></td>
             </tr>
             <tr>
-                <td>Descrizione</td>
-                <td><input type="text" placeholder="Descrizione del Buffet"
+                <td><h2>Descrizione</h2>
+                    <input type="text" placeholder="Descrizione del Buffet"
                            required th:field="*{descrizione}"/></td>
                 <td th:if="${#fields.hasErrors('descrizione')}"
                     th:errors="*{descrizione}" th:style="'color:red'"></td>
             </tr>
             <tr>
-                <td>Seleziona lo chef:</td>
-                <td><select th:name="idchef">
+                <td><h2>Seleziona lo chef:</h2>
+                    <select th:name="idchef">
                     <option value="0">Seleziona uno Chef</option>
                     <option th:each="che : ${chefs}" th:value="${che.id}"
                             th:text="${che.nome} + ' '+ ${che.cognome}"
@@ -39,18 +39,19 @@
                 </select></td>
             </tr>
             <tr>
-                <td>Seleziona i piatti appartenenti al tuo buffet</td>
-                <td>
-                    <ul>
-                        <li th:each="piatto : ${piatti}"><input type="checkbox"
-                                                                th:value="${piatto.id}" th:text="${piatto.nome}"
-                                                                th:name="idpiatti" th:checked="${piattiSelected.contains(piatto)}"/></li>
-                    </ul>
+                <td><h2>Seleziona i piatti appartenenti al tuo buffet</h2>
+                        <div th:each="piatto : ${piatti}">
+                            <label class="containerCheck" >
+                            <input type="checkbox" th:value="${piatto.id}" th:text="${piatto.nome}"
+                                   th:name="idpiatti" th:checked="${piattiSelected.contains(piatto)}"/>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <p>Seleziona un'immagine:</p> <input type="file" accept="image/*"
+                    <p><h2>Seleziona un'immagine:</h2></p> <input type="file" accept="image/*"
                                                          class="custom-file-input" id="customFile" name="file">
                 </td>
             </tr>

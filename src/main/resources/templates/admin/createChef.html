@@ -15,22 +15,22 @@
 	<form th:action="@{/admin/createchef}" method="POST" enctype="multipart/form-data" th:object="${chef}">
 		<table>
 			<tr>
-				<td>Nome</td>
-				<td><input type="text" placeholder="Nome" required
+				<td><h2>Nome</h2>
+					<input type="text" placeholder="Nome" required
 					th:field="*{nome}" /></td>
 				<td th:if="${#fields.hasErrors('nome')}"
 					th:errors="*{nome}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
-				<td>Cognome</td>
-				<td><input type="text" placeholder="Cognome" required
+				<td><h2>Cognome</h2>
+					<input type="text" placeholder="Cognome" required
 					th:field="*{cognome}" /></td>
 				<td th:if="${#fields.hasErrors('cognome')}"
 					th:errors="*{cognome}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
-				<td>Nazionalita</td>
-				<td><input type="text" placeholder="Nazionalita" required
+				<td><h2>Nazionalita</h2>
+					<input type="text" placeholder="Nazionalita" required
 					th:field="*{nazionalita}" /></td>
 				<td th:if="${#fields.hasErrors('nazionalita')}"
 					th:errors="*{nazionalita}" th:style="'color:red'"></td>
@@ -44,7 +44,7 @@
 
 			<tr>
 				<td>
-					<p>Seleziona un'immagine:</p> <input type="file" accept="image/*" class="custom-file-input" id="customFile" name="file">
+					<p><h2>Seleziona un'immagine:</h2></p> <input type="file" accept="image/*" class="custom-file-input" id="customFile" name="file">
 				</td>
 			</tr>
 			<tr>

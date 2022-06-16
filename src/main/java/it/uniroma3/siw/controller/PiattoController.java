@@ -110,15 +110,15 @@ public class PiattoController {
         }
 
         if (!piattoBindingResult.hasErrors()) {
-            Piatto old = this.piattoService.findById(id);
-            old.updateValues(piatto);
+            Piatto original = this.piattoService.findById(id);
+            original.updateValues(piatto);
 
 
-            old.setIngredienti(ingredienti);
-            piattoService.save(old);
+            original.setIngredienti(ingredienti);
+            piattoService.save(original);
             if (!image.isEmpty()) {
-                piatto.setImmagine(Shared.SavePicture(piatto.getId(), "/images/piatto/", image));
-                piattoService.save(piatto);
+                original.setImmagine(Shared.SavePicture(original.getId(), "/images/piatto/", image));
+                piattoService.save(original);
             }
             return "redirect:/show/piatto/" + id;
         } else {

@@ -11,55 +11,64 @@
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
 <div>
-    <h3 th:text="#{header.registra}">Modifica Chef</h3>
+    <h3 th:text="#{header.modificaChef}">Modifica Chef</h3>
     <form method="POST" enctype="multipart/form-data" th:action="@{'/admin/modificachef/' + ${chef.id}}"
           th:object="${chef}">
-        <div class="modifierFlex">
-            <img th:src="${chef.immagine}" alt="Buffet picture" class="modifiedImage"/>
-            <table>
-                <tr>
-                    <td>Nome</td>
-                    <td><input type="text" placeholder="Nome" required
-                               th:field="*{nome}"/></td>
-                    <td th:if="${#fields.hasErrors('nome')}"
-                        th:errors="*{nome}" th:style="'color:red'"></td>
-                </tr>
-                <tr>
-                    <td>Cognome</td>
-                    <td><input type="text" placeholder="Cognome" required
-                               th:field="*{cognome}"/></td>
-                    <td th:if="${#fields.hasErrors('cognome')}"
-                        th:errors="*{cognome}" th:style="'color:red'"></td>
-                </tr>
-                <tr>
-                    <td>Nazionalita</td>
-                    <td><input type="text" placeholder="Nazionalita" required
-                               th:field="*{nazionalita}"/></td>
-                    <td th:if="${#fields.hasErrors('nazionalita')}"
-                        th:errors="*{nazionalita}" th:style="'color:red'"></td>
-                </tr>
+        <div class="showContainer">
+            <div class="show">
+                <img th:src="${chef.immagine}" alt="Buffet picture" />
+            </div>
+            <div class="showModifica">
+                <table>
+                    <tr>
+                        <td>
+                            <h2>Nome</h2>
+                            <input type="text" placeholder="Nome" required
+                                   th:field="*{nome}"/>
+                        </td>
+                        <td th:if="${#fields.hasErrors('nome')}"
+                            th:errors="*{nome}" th:style="'color:red'"></td>
+                    </tr>
+                    <tr>
+                        <td><h2>Cognome</h2>
+                            <input type="text" placeholder="Cognome" required
+                                   th:field="*{cognome}"/>
+                        </td>
+                        <td th:if="${#fields.hasErrors('cognome')}"
+                            th:errors="*{cognome}" th:style="'color:red'"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h2>Nazionalita</h2>
+                            <input type="text" placeholder="Nazionalita" required
+                                   th:field="*{nazionalita}"/>
+                        </td>
+                        <td th:if="${#fields.hasErrors('nazionalita')}"
+                            th:errors="*{nazionalita}" th:style="'color:red'"></td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <p>Modifica immagine:</p> <input type="file" accept="image/*" class="custom-file-input"
-                                                         id="customFile" name="file">
-                    </td>
-                </tr>
-                <tr>
-                    <div th:if="${#fields.hasErrors('global')}">
-                        <h3>Global errors:</h3>
-                        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
-                    </div>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit" class="login">Modifica Chef</button>
-                        <a th:href="@{'/admin/deletechef/' + ${chef.id}}">
-                            <button type="button" class="loginErase">Elimina Chef</button>
-                        </a>
-                    </td>
-                </tr>
-            </table>
+                    <tr>
+                        <td>
+                            <p><h2>Modifica immagine:</h2></p> <input type="file" accept="image/*" class="custom-file-input"
+                                                             id="customFile" name="file">
+                        </td>
+                    </tr>
+                    <tr>
+                        <div th:if="${#fields.hasErrors('global')}">
+                            <h3>Global errors:</h3>
+                            <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
+                        </div>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" class="loginConfermaModifica">Modifica Chef</button>
+                            <a th:href="@{'/admin/deletechef/' + ${chef.id}}">
+                                <button type="button" class="loginErase">Elimina Chef</button>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </form>
 </div>

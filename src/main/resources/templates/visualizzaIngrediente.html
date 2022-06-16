@@ -11,27 +11,31 @@
 
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
-<h3>Dettagli Ingrediente</h3>
+<h1 class="centerTitle">Dettagli Ingrediente</h1>
 <div>
     <div class="showContainer">
         <div class="show">
-            <img th:src="${ingrediente.immagine}" class="show"
+            <img th:src="${ingrediente.immagine}" class="showPic"
                  alt="Ingredient picture"/>
+
+        </div>
+        <div class="show">
+            <div class="BuffetTextContainer">
+                <div class="chefBuffetText">
+                    <h1 class="showTextIngrediente">Nome:</h1>
+                    <h2 th:text="${ingrediente.nome}">Nome</h2>
+                    <h1 class="showTextIngrediente">Origine:</h1>
+                    <h2 th:text="${ingrediente.origine}">Origine</h2>
+                    <h1 class="showTextIngrediente">Descrizione:</h1>
+                    <h2 th:text="${ingrediente.descrizione}">Descrizione</h2>
+                </div>
+            </div>
             <div sec:authorize-url="/admin" class="adminButton">
                 <h1>
                     <a th:href="@{'/admin/modificaingrediente/' + ${ingrediente.getId()}}">
                         <button class="adminCommandButton">Modifica Ingrediente</button>
                     </a>
                 </h1>
-            </div>
-        </div>
-        <div class="show">
-            <div class="BuffetTextContainer">
-                <div class="chefBuffetText">
-                    <h1 th:text="${ingrediente.nome}">Nome</h1>
-                    <h1 th:text="${ingrediente.origine}">Origine</h1>
-                    <h1 th:text="${ingrediente.descrizione}">Descrizione</h1>
-                </div>
             </div>
         </div>
     </div>

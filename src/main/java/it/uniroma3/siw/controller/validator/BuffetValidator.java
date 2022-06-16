@@ -23,9 +23,12 @@ public class BuffetValidator implements Validator{
 
 	@Override
 	public void validate(Object o, Errors errors) {
-		
+
+		//Verifico la presenza di spazi o di stringa vuota
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descrizione", "required");
+
+		//Nel caso il buffet già esista, rifiuto con errore buffet.duplicato
 
 		if (!errors.hasErrors()) {
 			if (this.buffetService.alreadyExists((Buffet)o)) {
@@ -36,6 +39,9 @@ public class BuffetValidator implements Validator{
 	}
 
     public void validateUpdate(Object o, Errors errors) {
+
+		//Verifico la presenza di spazi o di stringa vuota
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descrizione", "required");
     }

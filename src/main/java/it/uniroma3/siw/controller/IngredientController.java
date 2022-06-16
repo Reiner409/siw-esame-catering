@@ -48,9 +48,12 @@ public class IngredientController {
 	@PostMapping("/admin/createingrediente")
 	public String creaIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente,
 			@RequestParam("file") MultipartFile image, BindingResult ingredienteBindingResult, Model model) {
-		this.ingredienteValidator.validateUpdate(ingrediente, ingredienteBindingResult);
+
+		//Valido la creazione dell'ingrediente
+		this.ingredienteValidator.validate(ingrediente, ingredienteBindingResult);
 
 		if (!ingredienteBindingResult.hasErrors()) {
+			//Salvo l'ingrediente modificato e gli risetto l'immagine per poi risalvarlo
 			ingredienteService.save(ingrediente);
 			ingrediente.setImmagine(Shared.SavePicture(ingrediente.getId(), pictureFolder, image));
 			ingredienteService.save(ingrediente);
@@ -74,14 +77,16 @@ public class IngredientController {
 			@RequestParam("file") MultipartFile image,
 			BindingResult ingredientBindingResult,
 			Model model) {
-		
+		//Valida l'aggiornamento dell'ingrediente
 		this.ingredienteValidator.validateUpdate(ingrediente, ingredientBindingResult);
 		
 		if (!ingredientBindingResult.hasErrors()) {
-			
+
+			//Trovo l'ingrediente originale e ci aggiorno i valori
 			Ingrediente original = this.ingredienteService.findById(id);
 			original.updateValues(ingrediente);
 
+			//Salvo l'ingrediente originale modificato
 			ingredienteService.save(original);
 			if (!image.isEmpty()) {
 				original.setImmagine(Shared.SavePicture(original.getId(), pictureFolder, image));
@@ -103,7 +108,7 @@ public class IngredientController {
 		
 		//Due vie: Cancellazione del piatto o rimozione dell'ingrediente da ogni piatto.
 		
-		//Prendo la seconda perchè non voglio perdere i piatti :)
+		//Prendo la seconda via perchè non voglio perdere i piatti a causa di un'errore
 		
 		for(Piatto piatto : piatti)
 		{

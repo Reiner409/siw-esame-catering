@@ -133,11 +133,8 @@ a {
 .informationsBoxLeft {
     display: flex;
     flex-direction: row;
-    margin: 2%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin: 5% 2%;
     justify-content: space-between;
-    margin-bottom: 5%;
     animation-name: slideinLeft;
     animation-duration: 2.5s;
 }
@@ -145,9 +142,7 @@ a {
 .informationsBoxRight {
     display: flex;
     flex-direction: row;
-    margin: 2%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin: 5% 2%;
     justify-content: space-between;
     animation-name: slideinRight;
     animation-duration: 2.5s;
@@ -156,7 +151,7 @@ a {
 @keyframes slideinLeft {
     from {
         margin-left: 100%;
-        opacity: 0%;
+        opacity: 0;
     }
     to {
         margin-left: 2%;
@@ -168,7 +163,7 @@ a {
 
     from {
         margin-right: 100%;
-        opacity: 0%;
+        opacity: 0;
     }
     to {
         margin-right: 2%;

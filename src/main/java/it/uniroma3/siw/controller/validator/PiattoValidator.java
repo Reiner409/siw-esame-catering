@@ -23,8 +23,13 @@ public class PiattoValidator implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
+
+		//Verifico la presenza di spazi o di stringa vuota
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descrizione", "required");
+
+		//Nel caso il piatto già esista, rifiuto con errore piatto.duplicato
 
 		if (!errors.hasErrors()) {
 			if (this.piattoService.alreadyExists((Piatto)target)) {
@@ -34,8 +39,10 @@ public class PiattoValidator implements Validator{
 	}
 
     public void validateUpdate (Object target, Errors errors) {
+
+		//Verifico la presenza di spazi o di stringa vuota
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descrizione", "required");
-
 	}
 }

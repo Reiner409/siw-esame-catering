@@ -23,9 +23,14 @@ public class IngredienteValidator implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
+
+		//Verifico la presenza di spazi o di stringa vuota
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "origine", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descrizione", "required");
+
+		//Nel caso lo ingrediente già esista, rifiuto con errore ingrediente.duplicato
 
 		if (!errors.hasErrors()) {
 			if (this.ingredienteService.alreadyExists((Ingrediente)target)) {
@@ -35,6 +40,9 @@ public class IngredienteValidator implements Validator{
 	}
 
     public void validateUpdate(Object target, Errors errors) {
+
+		//Verifico la presenza di spazi o di stringa vuota
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "origine", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descrizione", "required");

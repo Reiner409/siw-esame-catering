@@ -73,8 +73,11 @@ public class BuffetController {
                                          @RequestParam(value = "idchef", required = false) Long idChef,
                                          @RequestParam("file") MultipartFile image,
                                          Model model) {
+
+        //Valida i dati forniti per l'update del buffet
         this.buffetValidator.validateUpdate(updated, buffetBindingResult);
 
+        //Nel caso non è stato fornito uno chef, rifiuta la conferma
         if (idChef == 0)
             buffetBindingResult.reject("buffet.noChef");
 
@@ -94,27 +97,32 @@ public class BuffetController {
 
             if (buffet.getChef() == null || buffet.getChef().getId() != idChef) {
 
+                //Se è presente uno chef, gli rimuovo il buffet e lo risalvo
                 if (buffet.getChef() != null) {
                     Chef oldChef = buffet.getChef();
                     oldChef.removeBuffet(buffet);
                     this.chefService.save(oldChef);
                 }
 
+                //Setto lo chef, gli aggiungo il buffet e lo salvo.
                 Chef chef = this.chefService.findById(idChef);
                 buffet.setChef(chef);
                 chef.getBuffet().add(buffet);
                 this.chefService.save(chef);
             }
 
+            //Salvo il buffet
             buffetService.save(buffet);
             if (!image.isEmpty()) {
+                //Nel caso l'immagine è stata modificata, la cambio e risalvo il buffet.
                 buffet.setImmagine(Shared.SavePicture(buffet.getId(), pictureFolder, image));
                 buffetService.save(buffet);
             }
             return "redirect:/show/buffet/" + idBuffet;
         } else {
 
-
+            //Nel caso ci sono errori, reinserisco tutti i dati per poterli
+            //Riprendere da dove sono stati lasciati
             model.addAttribute("piatti", this.piattoService.findAll());
             model.addAttribute("piattiSelected", piatti);
             model.addAttribute("chefs", this.chefService.findAll());
@@ -147,6 +155,7 @@ public class BuffetController {
                              Model model) {
         this.buffetValidator.validate(buffet, buffetBindingResult);
 
+        //Prendo i piatti selezionati
         List<Piatto> piatti = new ArrayList<>();
         if (idPiatti != null) {
             for (Long idPiatto : idPiatti) {
@@ -154,21 +163,25 @@ public class BuffetController {
             }
         }
 
+        //Nel caso non è stato selezionato uno chef, rifiuto l'operazione
         if (idChef == 0)
             buffetBindingResult.reject("buffet.noChef");
 
         if (!buffetBindingResult.hasErrors()) {
 
+            //Imposto i piatti al buffet
             buffet.setPiatti(piatti);
 
+            //Imposto lo chef al buffet e lo salvo
             Chef chef = this.chefService.findById(idChef);
             buffet.setChef(chef);
             buffetService.save(buffet);
 
+            //Aggiungo il buffet allo chef e lo salvo
             chef.getBuffet().add(buffet);
             this.chefService.save(chef);
 
-
+            //Imposto l'immagine per il buffet
             buffet.setImmagine(Shared.SavePicture(buffet.getId(), pictureFolder, image));
             buffetService.save(buffet);
             return "redirect:/show/buffet/" + buffet.getId();
@@ -184,15 +197,19 @@ public class BuffetController {
 
     @GetMapping("/admin/deletebuffet/{id}")
     public String deleteBuffet(Model model, @PathVariable("id") Long id) {
+
+        //Trovo il buffet e da esso ricavo lo chef
         Buffet buffet = this.buffetService.findById(id);
         Chef chef = buffet.getChef();
 
         if (chef != null) {
+            //Elimino il buffet dallo chef
             chef.removeBuffet(buffet);
             buffet.setChef(null);
             this.chefService.save(chef);
         }
 
+        //Elimino il buffet
         this.buffetService.delete(buffet);
 
         return "redirect:/index";

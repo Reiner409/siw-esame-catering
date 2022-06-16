@@ -26,6 +26,11 @@ public class CredentialsValidator implements Validator{
         String username = credentials.getUsername().trim();
         String password = credentials.getPassword().trim();
 
+        /*
+        Verifico se lo username rispetti la size e che non sia una stringa vuota
+        Effettuo la stessa verifica per la password
+        */
+
         if (username.isEmpty())
             errors.rejectValue("username", "required");
         else if (username.length() < MIN_USERNAME_LENGTH || username.length() > MAX_USERNAME_LENGTH)

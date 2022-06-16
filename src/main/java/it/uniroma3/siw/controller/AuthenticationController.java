@@ -65,12 +65,11 @@ public class AuthenticationController {
             BindingResult credentialsBindingResult,
             Model model)
 	{
+		//Valido Utente e Credenziali fornite
 		this.userValidator.validate(user, userBindingResult);
 		this.credentialsValidator.validate(credentials, credentialsBindingResult);
 		
 		if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
-            // set the user and store the credentials;
-            // this also stores the User, thanks to Cascade.ALL policy
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             return "registrationSuccessful";
@@ -86,8 +85,5 @@ public class AuthenticationController {
 	{
 		return "registrationSuccessful";
 	}
-	
-	
-	
-	
+
 }

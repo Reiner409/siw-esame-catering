@@ -49,9 +49,11 @@ public class ChefController {
 			@RequestParam("file") MultipartFile image,
 			Model model) {
 
+		//Valido i dati dello chef
 		this.chefValidator.validate(chef, chefBindingResult);
 
 		if (!chefBindingResult.hasErrors()) {
+			//Nel caso in cui lo chef non ha errori, lo salvo.
 			chefService.save(chef);
 			chef.setImmagine(Shared.SavePicture(chef.getId(), "/images/chef/", image));
 			chefService.save(chef);
@@ -73,12 +75,15 @@ public class ChefController {
 			@RequestParam("file") MultipartFile image,
 			BindingResult chefBindingResult, Model model) {
 
+		//Valido l'update dello chef
 		this.chefValidator.validateUpdate(chef, chefBindingResult);
 
 		if (!chefBindingResult.hasErrors()) {
+			//Riottengo lo chef originale e gli aggiorno i valori.
 			Chef original = this.chefService.findById(id);
 			original.updateValues(chef);
 
+			//Salvo lo chef originale aggiornato
 			chefService.save(original);
 			if (!image.isEmpty()) {
 				original.setImmagine(Shared.SavePicture(original.getId(), "/images/chef/", image));

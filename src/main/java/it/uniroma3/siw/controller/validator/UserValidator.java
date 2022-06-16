@@ -19,6 +19,11 @@ public class UserValidator implements Validator{
 	        String nome = user.getNome().trim();
 	        String cognome = user.getCognome().trim();
 
+			/*
+			Verifico che il nome rispetti la size e che non sia una stringa vuota
+			Effettuo la stessa verifica per il cognome
+			*/
+
 	        if (nome.isEmpty())
 	            errors.rejectValue("nome", "required");
 	        else if (nome.length() < MIN_NAME_LENGTH || nome.length() > MAX_NAME_LENGTH)

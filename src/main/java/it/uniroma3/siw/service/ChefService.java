@@ -57,6 +57,7 @@ public class ChefService implements IServices<Chef> {
 			return false;
 	}
 
+	//Cerco i primi 4 chef necessari per la schermata principale
 	public List<Chef> findFour() {
 		int counter = 0;
 		List<Chef> chefs = new LinkedList<Chef>();

@@ -61,8 +61,10 @@ public class PiattoController {
                                      @RequestParam(value = "idingredienti", required = false) List<Long> idingredienti,
                                      @RequestParam("file") MultipartFile image,
                                      Model model) {
+        //Valido i dati forniti per la creazione del piatto
         this.piattoValidator.validate(piatto, piattoBindingResult);
 
+        //Ottengo la lista degli ingredienti forniti dall'amministratore
         List<Ingrediente> ingredienti = new ArrayList<>();
         if (idingredienti != null) {
             for (Long idIngr : idingredienti) {
@@ -71,8 +73,10 @@ public class PiattoController {
         }
 
         if (!piattoBindingResult.hasErrors()) {
+            //Imposto gli ingredienti e salvo il piatto.
             piatto.setIngredienti(ingredienti);
             piattoService.save(piatto);
+            //Imposto l'immagine per poi risalvare il piatto
             piatto.setImmagine(Shared.SavePicture(piatto.getId(), "/images/piatto/", image));
             piattoService.save(piatto);
             return "redirect:/show/piatto/" + piatto.getId();
@@ -100,8 +104,11 @@ public class PiattoController {
                                          @RequestParam(value = "idingredienti", required = false) List<Long> idingredienti,
                                          @RequestParam("file") MultipartFile image,
                                          Model model) {
+
+        //Valido che i dati necessari per l'aggiornamento siano validi
         this.piattoValidator.validateUpdate(piatto, piattoBindingResult);
 
+        //Ottengo la lista degli ingredienti selezionati dall'amministratore
         List<Ingrediente> ingredienti = new ArrayList<>();
         if (idingredienti != null) {
             for (Long idIngr : idingredienti) {
@@ -110,10 +117,11 @@ public class PiattoController {
         }
 
         if (!piattoBindingResult.hasErrors()) {
+            //Ottengo il piatto originale e lo aggiorno con i valori forniti
             Piatto original = this.piattoService.findById(id);
             original.updateValues(piatto);
 
-
+            //Imposto gli ingredienti e salvo il piatto
             original.setIngredienti(ingredienti);
             piattoService.save(original);
             if (!image.isEmpty()) {
@@ -134,6 +142,7 @@ public class PiattoController {
         Piatto piatto = this.piattoService.findById(id);
         List<Buffet> buffets = this.buffetService.findByPiatto(piatto);
 
+        //Rimuovo il piatto da tutti i buffet
         for (Buffet b : buffets) {
             b.getPiatti().remove(piatto);
             this.buffetService.save(b);

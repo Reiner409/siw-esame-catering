@@ -23,10 +23,14 @@ public class ChefValidator implements Validator{
 
 	@Override
 	public void validate(Object o, Errors errors) {
-		
+
+		//Verifico la presenza di spazi o di stringa vuota
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cognome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nazionalita", "required");
+
+		//Nel caso lo chef già esista, rifiuto con errore chef.duplicato
 
 		if (!errors.hasErrors()) {
 			if (this.chefService.alreadyExists((Chef)o)) {
@@ -37,9 +41,11 @@ public class ChefValidator implements Validator{
 	}
 
 	public void validateUpdate(Object o, Errors errors) {
+
+		//Verifico la presenza di spazi o di stringa vuota
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cognome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nazionalita", "required");
-
 	}
 }

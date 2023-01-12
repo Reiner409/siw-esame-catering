@@ -4,8 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 bat 'mvn clean install'
-				bat 'cd ..'
-				bat 'python scriptMaven.py'
+		bat 'python ../scriptMaven.py'
             }
         }
     }
